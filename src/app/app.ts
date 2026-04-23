@@ -7,10 +7,11 @@ import { TrustCarePreview } from './trust-care-preview/trust-care-preview';
 import { SpecialityCare } from './speciality-care/speciality-care';
 import { AppFeaturesPreview } from './app-features-preview/app-features-preview';
 import { RegistrationForm } from './registration-form/registration-form';
+import { Footer } from './footer/footer';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Home, HealthcareEcosystem, GetStarted, TrustCarePreview, SpecialityCare, AppFeaturesPreview, RegistrationForm],
+  imports: [RouterOutlet, Home, HealthcareEcosystem, GetStarted, TrustCarePreview, SpecialityCare, AppFeaturesPreview, RegistrationForm,Footer],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
