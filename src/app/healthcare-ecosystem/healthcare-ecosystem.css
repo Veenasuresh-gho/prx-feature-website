@@ -1,0 +1,220 @@
+/* ════════════════════════════════════════
+   SECTION
+════════════════════════════════════════ */
+.ecosystem {
+    padding: 72px 0;
+}
+
+.ecosystem__container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* ── Header ── */
+.ecosystem__header {
+    text-align: center;
+    margin-bottom: 48px;
+    max-width: 720px;
+}
+
+.ecosystem__title {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 24px;
+    letter-spacing: 0%;
+    margin-bottom: 14px;
+}
+
+.ecosystem__subtitle {
+    font-weight: 500;
+    color: var(--muted-text);
+    font-style: Medium;
+    font-size: 14px;
+    line-height: 24px;
+    letter-spacing: 2%;
+    text-align: center;
+
+}
+
+/* ── Main grid (12 cards) ── */
+.ecosystem__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    width: 100%;
+}
+
+/* ── Last row (2 centred cards) ── */
+.ecosystem__last-row {
+    display: grid;
+    grid-template-columns: repeat(2, calc(25% - 6px));
+    gap: 16px;
+    margin-top: 16px;
+    justify-content: center;
+    width: 100%;
+}
+
+/* ── Card ── */
+.ecosystem__card {
+    background: #ffffff;
+    border: 1px solid #d9d9d9;
+    border-radius: 8px;
+    padding: 20px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: box-shadow .18s ease, border-color .18s ease;
+}
+
+.ecosystem__card:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, .08);
+    border-color: #b8b8b8;
+}
+
+.ecosystem__card-title {
+    font-weight: 600;
+    font-style: SemiBold;
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: 2%;
+    text-align: center;
+    color: 000000;
+}
+
+.ecosystem__card-desc {
+    font-weight: 400;
+    font-style: Regular;
+    color: var(--muted-text);
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: 2%;
+    text-align: center;
+
+}
+
+/* ════════════════════════════════════════
+   TABLET  ≤ 1024px  →  3 columns
+════════════════════════════════════════ */
+@media(max-width:1024px) {
+    .ecosystem {
+        padding: 60px 0
+    }
+
+    .ecosystem__title {
+        font-size: 32px
+    }
+
+    .ecosystem__grid {
+        grid-template-columns: repeat(3, 1fr)
+    }
+
+    .ecosystem__last-row {
+        grid-template-columns: repeat(2, calc(33.333% - 5.5px));
+    }
+}
+
+/* ════════════════════════════════════════
+   TABLET SMALL  ≤ 768px
+════════════════════════════════════════ */
+@media(max-width:768px) {
+    .ecosystem {
+        padding: 52px 0
+    }
+
+    .ecosystem__title {
+        font-size: 28px
+    }
+
+    .ecosystem__subtitle {
+        font-size: 16px
+    }
+
+    .ecosystem__header {
+        margin-bottom: 36px
+    }
+
+    .ecosystem__grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px
+    }
+
+    .ecosystem__last-row {
+        grid-template-columns: repeat(2, calc(33.333% - 4px));
+        gap: 12px;
+        margin-top: 12px;
+    }
+}
+
+/* ════════════════════════════════════════
+   MOBILE  ≤ 480px  →  2 columns
+════════════════════════════════════════ */
+@media(max-width:480px) {
+    .ecosystem {
+        padding: 44px 0
+    }
+
+    .ecosystem__container {
+        padding: 0 16px
+    }
+
+    .ecosystem__title {
+        font-size: 26px
+    }
+
+    .ecosystem__subtitle {
+        font-size: 15px
+    }
+
+    .ecosystem__header {
+        margin-bottom: 28px
+    }
+
+    .ecosystem__grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px
+    }
+
+    .ecosystem__last-row {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        margin-top: 10px;
+    }
+
+    .ecosystem__card {
+        padding: 16px 14px;
+        gap: 7px
+    }
+
+    .ecosystem__card-title {
+        font-size: 14px
+    }
+
+    .ecosystem__card-desc {
+        font-size: 13px
+    }
+}
+
+/* ════════════════════════════════════════
+   MOBILE XS  ≤ 360px
+════════════════════════════════════════ */
+@media(max-width:360px) {
+    .ecosystem__title {
+        font-size: 22px
+    }
+
+    .ecosystem__subtitle {
+        font-size: 14px
+    }
+
+    .ecosystem__card-title {
+        font-size: 13px
+    }
+
+    .ecosystem__card-desc {
+        font-size: 12px
+    }
+}

@@ -1,0 +1,513 @@
+ .heading {
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     text-align: center;
+     margin-bottom: 30px;
+ }
+
+ .heading h1 {
+     font-weight: 600;
+     font-style: SemiBold;
+     font-size: 24px;
+     line-height: 24px;
+     letter-spacing: 0%;
+     text-align: center;
+     margin-bottom: 10px;
+ }
+
+ .heading p {
+     font-weight: 500;
+     font-style: Medium;
+     font-size: 14px;
+     line-height: 24px;
+     letter-spacing: 2%;
+     text-align: center;
+     color: var(--muted-text);
+ }
+
+ .hero {
+     background: #3d5a96;
+     position: relative;
+     overflow: hidden;
+     padding-bottom: 64px
+ }
+
+ .hero__in {
+     max-width: 1100px;
+     margin: 0 auto;
+     padding: 40px 24px 0;
+     display: flex;
+     align-items: flex-end;
+     justify-content: space-between;
+     min-height: 190px
+ }
+
+ .hero__title {
+     font-weight: 600;
+     font-style: SemiBold;
+     font-size: 36px;
+     line-height: 55px;
+     letter-spacing: 0%;
+     color: white;
+ }
+
+ /* Illustration */
+ .hero__illus {
+     position: relative;
+     width: 280px;
+     height: 120px;
+     flex-shrink: 0
+ }
+
+
+
+
+ /* ═══════════════════════ SEARCH CARD ═══════════════════════ */
+ .srch-wrap {
+     max-width: 1100px;
+     margin: -44px auto 0;
+     padding-inline: 24px;
+     position: relative;
+     z-index: 10
+ }
+
+ .srch-card {
+     background: #fff;
+     border-radius: 14px;
+     box-shadow: 0 4px 28px rgba(0, 0, 0, .10);
+     padding: 22px 24px
+ }
+
+ .srch-form {
+     display: flex;
+     align-items: flex-end;
+     gap: 0
+ }
+
+ .sf {
+     flex: 1;
+     display: flex;
+     flex-direction: column;
+     gap: 6px;
+     padding-inline: 16px
+ }
+
+ .sf:first-child {
+     padding-left: 4px
+ }
+
+ .sf label {
+     font-size: 12px;
+     font-weight: 600;
+     color: #888;
+     line-height: 1
+ }
+
+ .sf input {
+     border: none;
+     outline: none;
+     font-family: inherit;
+     font-size: 14px;
+     color: #333;
+     background: transparent;
+     padding: 6px 0;
+     line-height: 1.5;
+     width: 100%;
+     border-bottom: 1.5px solid transparent;
+     transition: border-color .18s
+ }
+
+ .sf input::placeholder {
+     color: #aaa
+ }
+
+ .sf input:focus {
+     border-bottom-color: #3d5a96
+ }
+
+ .sf-div {
+     width: 1px;
+     height: 40px;
+     background: #e8e8e8;
+     flex-shrink: 0;
+     align-self: center
+ }
+
+ .srch-btn {
+     display: inline-flex;
+     align-items: center;
+     gap: 7px;
+     margin-left: 20px;
+     padding: 11px 20px;
+     background: #3d5a96;
+     color: #fff;
+     border: none;
+     border-radius: 8px;
+     font-family: inherit;
+     font-size: 14px;
+     font-weight: 600;
+     cursor: pointer;
+     white-space: nowrap;
+     flex-shrink: 0;
+     transition: background .18s;
+     line-height: 1
+ }
+
+ .srch-btn:hover {
+     background: #334d85
+ }
+
+ .srch-btn svg {
+     width: 15px;
+     height: 15px;
+     flex-shrink: 0
+ }
+
+ /* ═══════════════════════ GRID ═══════════════════════ */
+ .grid-sec {
+     padding: 50px 230px;
+ }
+
+ .grid {
+     display: grid;
+     grid-template-columns: repeat(3, 1fr);
+     gap: 16px;
+     margin-bottom: 36px
+ }
+
+ /* Mobile grid — hidden on desktop */
+ .mob-grid {
+     display: none;
+     flex-direction: column;
+     gap: 14px;
+     padding-block: 24px 32px
+ }
+
+ /* ── Card ── */
+ .card {
+     background: #fff;
+     border: 1px solid #e8e8e8;
+     border-radius: 10px;
+     padding: 18px 18px 16px;
+     display: flex;
+     flex-direction: column;
+     cursor: pointer;
+     transition: box-shadow .18s, border-color .18s
+ }
+
+ .card:hover {
+     box-shadow: 0 4px 18px rgba(0, 0, 0, .08);
+     border-color: #d0d0d0
+ }
+
+ .card__ico {
+     width: 38px;
+     height: 38px;
+     border-radius: 8px;
+     background: #fdeee8;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     margin-bottom: 12px;
+     flex-shrink: 0
+ }
+
+ .card__ico svg {
+     width: 20px;
+     height: 20px;
+     color: #e8652a;
+     stroke: #e8652a
+ }
+
+ .card__title {
+     font-weight: 600;
+     font-style: SemiBold;
+     font-size: 14px;
+     line-height: 16px;
+     letter-spacing: 2%;
+     margin-bottom: 6px;
+     color: #000000;
+ }
+
+ .card__desc {
+     font-family: Poppins;
+     font-weight: 400;
+     font-style: Regular;
+     font-size: 14px;
+     line-height: 16px;
+     letter-spacing: 2%;
+     margin-bottom: 10px;
+     color: #656A74;
+ }
+
+ .card__tags {
+     display: flex;
+     align-items: center;
+     flex-wrap: wrap;
+     gap: 3px
+ }
+
+ .tag {
+     font-weight: 400;
+     font-style: Regular;
+     font-size: 14px;
+     line-height: 16px;
+     letter-spacing: 2%;
+     color: #FC9067;
+ }
+
+ .tag-sep {
+     font-size: 11px;
+     color: #e8652a;
+     margin-inline: 1px;
+     line-height: 1
+ }
+
+ /* ═══════════════════════ PAGINATION ═══════════════════════ */
+ .pag {
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     gap: 14px;
+     padding: 24px 0;
+
+     flex-wrap: nowrap;
+     /* ❗ PREVENT WRAP */
+     white-space: nowrap;
+     /* ❗ FORCE SINGLE LINE */
+ }
+
+ #pageNums {
+     display: flex;
+     gap: 14px;
+ }
+
+ .pag__arrow,
+ .pag__num {
+     width: 48px;
+     height: 48px;
+     border-radius: 12px;
+     /* square with rounded corners */
+     border: 1px solid #e6e6e6;
+     background: #fff;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     font-size: 16px;
+     font-weight: 600;
+     color: #333;
+     cursor: pointer;
+     transition: all 0.2s ease;
+ }
+
+ .pag__arrow {
+     color: #FC9067;
+ }
+
+ .pag__arrow:hover,
+ .pag__num:hover {
+     border-color: #FC9067;
+     color: #FC9067;
+ }
+
+ .pag__arrow:disabled {
+     opacity: 0.5;
+     cursor: not-allowed;
+ }
+
+ .pag__arrow svg {
+     width: 18px;
+     height: 18px;
+ }
+
+
+ .pag__num.active {
+     background: #FDEEE8;
+     border-color: #FC9067;
+     color: #FC9067;
+ }
+
+ /* See All button */
+ .see-all-wrap {
+     display: flex;
+     justify-content: center;
+     padding-top: 10px
+ }
+
+ .see-all {
+     display: inline-flex;
+     align-items: center;
+     gap: 8px;
+     padding: 11px 28px;
+     background: transparent;
+     color: #3d5a96;
+     border: 1.5px solid #d0d8ea;
+     border-radius: 8px;
+     font-family: inherit;
+     font-size: 14px;
+     font-weight: 600;
+     cursor: pointer;
+     transition: all .18s
+ }
+
+ .see-all:hover {
+     background: #f0f4ff;
+     border-color: #3d5a96
+ }
+
+ .see-all svg {
+     width: 15px;
+     height: 15px
+ }
+
+ /* ═══════════════════════ TABLET ≤ 1024px ═══════════════════════ */
+ @media(max-width:1024px) {
+     .hero__title {
+         font-size: 27px
+     }
+
+     .hero__illus {
+         width: 230px;
+         height: 160px
+     }
+
+     .hero__illus .patient {
+         width: 88px
+     }
+
+     .hero__illus .doctor {
+         width: 88px
+     }
+
+     .hero__illus .desk {
+         width: 195px
+     }
+
+     .srch-form {
+         flex-wrap: wrap;
+         gap: 14px
+     }
+
+     .sf {
+         flex: 1 1 calc(33% - 14px);
+         min-width: 130px;
+         padding-inline: 8px
+     }
+
+     .sf input {
+         border: 1px solid #e8e8e8;
+         border-radius: 6px;
+         padding: 8px 10px;
+         border-bottom-width: 1px
+     }
+
+     .sf input:focus {
+         border-color: #3d5a96
+     }
+
+     .sf-div {
+         display: none
+     }
+
+     .srch-btn {
+         width: 100%;
+         margin-left: 0;
+         justify-content: center;
+         padding: 12px 20px;
+         font-size: 15px
+     }
+
+     .grid {
+         grid-template-columns: repeat(2, 1fr)
+     }
+ }
+
+ /* ═══════════════════════ MOBILE ≤ 640px ═══════════════════════ */
+ @media(max-width:640px) {
+     .hero {
+         padding-bottom: 72px
+     }
+
+     .hero__in {
+         padding-top: 24px
+     }
+
+     .hero__title {
+         font-size: 22px;
+         max-width: 190px
+     }
+
+     .hero__illus {
+         width: 170px;
+         height: 140px
+     }
+
+     .hero__illus .patient {
+         width: 70px;
+         left: 8px
+     }
+
+     .hero__illus .doctor {
+         width: 72px;
+         right: 8px
+     }
+
+     .hero__illus .desk {
+         width: 155px
+     }
+
+     .srch-wrap {
+         padding-inline: 16px;
+         margin-top: -40px
+     }
+
+     .srch-card {
+         padding: 16px
+     }
+
+     .srch-form {
+         gap: 12px
+     }
+
+     .sf {
+         flex: 1 1 100%;
+         padding-inline: 0
+     }
+
+     .wrap {
+         padding-inline: 16px
+     }
+
+     .grid-sec {
+         display: none
+     }
+
+     .mob-grid {
+         display: flex
+     }
+ }
+
+ @media(max-width:400px) {
+     .hero__title {
+         font-size: 19px
+     }
+
+     .hero__illus {
+         width: 130px
+     }
+
+     .hero__illus .patient {
+         width: 55px;
+         left: 4px
+     }
+
+     .hero__illus .doctor {
+         width: 57px;
+         right: 4px
+     }
+
+     .hero__illus .desk {
+         width: 120px
+     }
+ }

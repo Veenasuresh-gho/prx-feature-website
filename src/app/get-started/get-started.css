@@ -1,0 +1,333 @@
+/* ════════════════════════════════════════
+   SECTION
+════════════════════════════════════════ */
+.gs {
+    background: #fff;
+    padding-top: 10px;
+    padding-bottom: 72px;
+}
+
+.gs__wrap {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+/* ── Header ── */
+.gs__hdr {
+    text-align: center;
+    margin-bottom: 48px;
+}
+
+.gs__title {
+    font-weight: 600;
+    font-style: SemiBold;
+    font-size: 24px;
+    line-height: 24px;
+    letter-spacing: 0%;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.gs__sub {
+    font-family: Poppins;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 14px;
+    line-height: 24px;
+    letter-spacing: 2%;
+    text-align: center;
+    color: var(--muted-text);
+}
+
+/* ── Cards row ── */
+.gs__cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+/* ── Card ── */
+.gs__card {
+    background: #fff;
+    border: 1px solid #d9d9d9;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: box-shadow .2s ease, border-color .2s ease;
+}
+
+.gs__card:hover {
+    box-shadow: 0 6px 24px rgba(0, 0, 0, .09);
+    border-color: #b8b8b8;
+}
+
+/* Image */
+.gs__img-wrap {
+    width: 100%;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    background: #f0f0f0;
+    flex-shrink: 0;
+    position: relative;
+}
+
+.gs__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    transition: transform .35s ease;
+}
+
+.gs__card:hover .gs__img {
+    transform: scale(1.03);
+}
+
+/* Placeholder (shown without real images) */
+.gs__ph {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: #f5f7fa;
+}
+
+.gs__ph-icon {
+    font-size: 48px;
+    opacity: .45;
+}
+
+.gs__ph-label {
+    font-size: 11px;
+    color: #999;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+}
+
+/* Card body */
+.gs__body {
+    padding: 20px 22px 22px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+/* Card title */
+.gs__card-title {
+    font-family: Poppins;
+    font-weight: 600;
+    font-style: SemiBold;
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: 2%;
+    margin-bottom: 14px;
+}
+
+/* Features list */
+.gs__feats {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    flex: 1;
+}
+
+.gs__feat {
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #333;
+}
+
+.gs__bullet {
+    font-weight: 400;
+    font-style: Regular;
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: 2%;
+    color: var(--muted-text);
+}
+
+/* CTA Button */
+.gs__btn {
+    display: block;
+    width: 100%;
+    padding: 13px 20px;
+    background: var(--primary-color);
+    color: #fff;
+    border: none;
+    border-radius: 7px;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background .18s ease, transform .12s ease;
+    margin-top: auto;
+    font-family: inherit;
+}
+
+.gs__btn:hover {
+    background: #334d85;
+}
+
+.gs__btn:active {
+    background: #2c4272;
+    transform: scale(.99);
+}
+
+
+/* ════════════════════════════════════════
+   TABLET  ≤ 1024px — horizontal scroll
+════════════════════════════════════════ */
+@media(max-width:1024px) {
+    .gs {
+        padding: 60px 0;
+    }
+
+    .gs__title {
+        font-size: 30px;
+    }
+
+    .gs__wrap {
+        overflow: hidden;
+        padding-inline: 20px;
+    }
+
+    .gs__cards {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 12px;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+
+    .gs__cards::-webkit-scrollbar {
+        display: none;
+    }
+
+    .gs__card {
+        flex: 0 0 calc(50% - 10px);
+        min-width: 280px;
+        scroll-snap-align: start;
+    }
+}
+
+/* ════════════════════════════════════════
+   TABLET SMALL  ≤ 768px
+════════════════════════════════════════ */
+@media(max-width:768px) {
+    .gs {
+        padding: 52px 0;
+    }
+
+    .gs__title {
+        font-size: 26px;
+    }
+
+    .gs__sub {
+        font-size: 15px;
+    }
+
+    .gs__hdr {
+        margin-bottom: 36px;
+    }
+
+    .gs__card {
+        flex: 0 0 calc(70vw - 32px);
+        min-width: 260px;
+    }
+}
+
+/* ════════════════════════════════════════
+   MOBILE  ≤ 480px — single column
+════════════════════════════════════════ */
+@media(max-width:480px) {
+    .gs {
+        padding: 44px 0;
+    }
+
+    .gs__wrap {
+        padding-inline: 16px;
+        overflow: visible;
+    }
+
+    .gs__title {
+        font-size: 24px;
+        line-height: 1.25;
+    }
+
+    .gs__sub {
+        font-size: 14px;
+    }
+
+    .gs__hdr {
+        margin-bottom: 28px;
+    }
+
+    .gs__cards {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        overflow-x: visible;
+        padding-bottom: 0;
+        scroll-snap-type: none;
+    }
+
+    .gs__card {
+        flex: none;
+        width: 100%;
+        min-width: unset;
+    }
+
+    .gs__body {
+        padding: 18px 18px 20px;
+    }
+
+    .gs__card-title {
+        font-size: 15px;
+        margin-bottom: 12px;
+    }
+
+    .gs__feat {
+        font-size: 14px;
+    }
+
+    .gs__btn {
+        font-size: 14px;
+        padding: 12px 20px;
+    }
+}
+
+/* ════════════════════════════════════════
+   MOBILE XS  ≤ 360px
+════════════════════════════════════════ */
+@media(max-width:360px) {
+    .gs__title {
+        font-size: 21px;
+    }
+
+    .gs__card-title {
+        font-size: 14px;
+    }
+
+    .gs__feat {
+        font-size: 13px;
+    }
+}

@@ -1,0 +1,70 @@
+<div class="heading">
+    <h1>Find the Right Care, or Offer Your Expertise</h1>
+    <p>Find the Right Care, or Offer Your Expertise</p>
+</div>
+
+<!-- ═══ HERO ═══ -->
+<header class="hero">
+    <div class="hero__in">
+        <h1 class="hero__title">Need a Neurologist?<br />Book instantly</h1>
+
+        <!-- Illustration -->
+        <div class="hero__illus" aria-hidden="true">
+            <img src="/Group.png" alt="">
+        </div>
+    </div>
+</header>
+
+<!-- ═══ SEARCH CARD ═══ -->
+<div class="srch-wrap">
+    <div class="srch-card">
+        <div class="srch-form">
+            <div class="sf">
+                <label for="cond">Search</label>
+                <input id="cond" type="text" placeholder="Condition / procedure / treatment" autocomplete="off" />
+            </div>
+            <div class="sf-div"></div>
+            <div class="sf">
+                <label for="fac">Facility</label>
+                <input id="fac" type="text" placeholder="Doctor's name / hospital / clinics" autocomplete="off" />
+            </div>
+            <div class="sf-div"></div>
+            <div class="sf">
+                <label for="loc">Location</label>
+                <input id="loc" type="text" value="Edappally, Ernakulam" autocomplete="off" />
+            </div>
+            <button class="srch-btn" onclick="doSearch()">
+                <svg viewBox="0 0 24 24" fill="none">
+                    <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2.2" />
+                    <path d="M17 17l4 4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" />
+                </svg>
+                Search
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- ═══ DESKTOP/TABLET GRID ═══ -->
+<section class="grid-sec">
+    <div class="wrap">
+        <div class="grid" id="desktopGrid"></div>
+        <nav class="pag" aria-label="Pages">
+            <button class="pag__arrow" id="prevBtn" (click)="prevPage()" [disabled]="page === 1">
+                <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+            </button>
+            <div id="pageNums"></div>
+            <button class="pag__arrow" id="nextBtn" (click)="nextPage()" [disabled]="page === total">
+                <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+            </button>
+        </nav>
+    </div>
+</section>
+
+<!-- ═══ MOBILE LIST ═══ -->
+<div class="mob-grid wrap" id="mobileGrid"></div>

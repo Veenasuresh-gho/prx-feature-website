@@ -1,1 +1,52 @@
-/* You can add global styles to this file, and also import other style files */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+@font-face {
+    font-family: 'Atomic Md';
+    src: url('/fonts/atomic-md.woff2') format('woff2'),
+        url('/fonts/atomic-md.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    font-family: 'Poppins', sans-serif;
+}
+
+:root {
+    --primary-color: #465E97;
+    --secondary-color: #FDF5F2;
+    --secondary-text: #FC9067;
+    --primary-text: #312F2F;
+    --muted-text: #656A74;
+}
+
+html {
+    font-size: 16px;
+}
+
+body {
+    -webkit-font-smoothing: antialiased;
+    color: var(--primary-text);
+    background: #fff;
+    overflow-x: hidden;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    list-style: none;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}

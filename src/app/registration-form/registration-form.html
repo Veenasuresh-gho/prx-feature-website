@@ -1,0 +1,108 @@
+
+
+<section class="reg">
+  <div class="reg__layout">
+
+    <!-- ══ LEFT: FORM PANEL ══ -->
+    <div class="reg__form-panel">
+      <div class="reg__content">
+
+        <h2 class="reg__title">Doctors, Clinics, Labs &amp; Pharmacies<br/>— Join PRX Care Free</h2>
+        <p class="reg__sub">Sign up to offer consultations, receive patient referrals, and grow your healthcare services with ease.</p>
+
+        <!-- <div class="reg__success" id="successMsg">
+          <div class="reg__success-icon">✓</div>
+          <h3 class="reg__success-title">Application Submitted!</h3>
+          <p class="reg__success-body">Thank you for joining PRx Care. Our team will review your application and reach out within 24–48 hours.</p>
+          <button class="reg__btn-ghost" onclick="resetForm()">Submit Another</button>
+        </div> -->
+
+        <!-- Form -->
+        <form class="reg__form" id="regForm" onsubmit="submitForm(event)" novalidate>
+
+          <!-- Facility Name -->
+          <div class="reg__field" id="f-facilityName">
+            <label class="reg__label" for="facilityName">Facility Name *</label>
+            <input class="reg__input" id="facilityName" type="text" placeholder="Enter Facility name" autocomplete="organization" oninput="clearErr('f-facilityName')"/>
+            <span class="err-msg" id="e-facilityName">This field is required.</span>
+          </div>
+
+          <!-- Contact Person Name -->
+          <div class="reg__field" id="f-contactPerson">
+            <label class="reg__label" for="contactPerson">Contact Person Name *</label>
+            <input class="reg__input" id="contactPerson" type="text" placeholder="Primary point of contact for PRx communication" autocomplete="name" oninput="clearErr('f-contactPerson')"/>
+            <span class="err-msg" id="e-contactPerson">This field is required.</span>
+          </div>
+
+          <div class="reg__field" id="f-facilityType">
+            <label class="reg__label" for="facilityType">Facility Type *</label>
+            <div class="sel-wrap">
+              <select class="reg__select" id="facilityType" onchange="clearErr('f-facilityType')">
+                <option value="" disabled selected>– Select –</option>
+                <option>Hospital</option>
+                <option>Clinic</option>
+                <option>Diagnostic Lab</option>
+                <option>Pharmacy</option>
+                <option>Dental Clinic</option>
+                <option>Nursing Home</option>
+                <option>Specialty Center</option>
+                <option>Polyclinic</option>
+                <option>Eye Care Center</option>
+                <option>Physiotherapy Center</option>
+              </select>
+              <span class="sel-arr">
+                <svg width="12" height="8" viewBox="0 0 12 8" fill="none"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+            </div>
+            <span class="err-msg" id="e-facilityType">Please select a facility type.</span>
+          </div>
+
+          <!-- Phone -->
+          <div class="reg__field" id="f-phone">
+            <label class="reg__label" for="phoneNum">Phone *</label>
+            <div class="phone-row">
+              <div class="country-wrap">
+                <select class="reg__country-sel" id="countryCode">
+                  <option value="+91">(+91)</option>
+                  <option value="+1">(+1)</option>
+                  <option value="+44">(+44)</option>
+                  <option value="+61">(+61)</option>
+                  <option value="+971">(+971)</option>
+                  <option value="+65">(+65)</option>
+                </select>
+                <span class="country-arr">
+                  <svg width="10" height="7" viewBox="0 0 12 8" fill="none"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+              </div>
+              <input class="reg__phone-num" id="phoneNum" type="tel" placeholder="00000  00000" autocomplete="tel-national" oninput="clearErr('f-phone')"/>
+            </div>
+            <span class="err-msg" id="e-phone">Please enter a valid phone number.</span>
+          </div>
+
+          <!-- Email Address -->
+          <div class="reg__field" id="f-email">
+            <label class="reg__label" for="email">Email Address *</label>
+            <input class="reg__input" id="email" type="email" placeholder="eg. marionhospital@gmail.com" autocomplete="email" oninput="clearErr('f-email')"/>
+            <span class="err-msg" id="e-email">Please enter a valid email address.</span>
+          </div>
+
+          <!-- Submit -->
+          <div class="reg__submit-row">
+            <button type="submit" class="reg__btn" id="submitBtn">
+              <span id="btnText">Submit</span>
+              <span class="spinner" id="btnSpinner"></span>
+            </button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+
+    <div class="reg__photo" role="img" aria-label="Modern medical clinic facility">
+        <img src="/registration.jpg" alt="Medical clinic" style="width:100%;height:100%;object-fit:cover"/>
+    </div>
+
+  </div>
+</section>
+
+

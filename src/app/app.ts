@@ -1,9 +1,16 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { Home } from './home/home';
+import { HealthcareEcosystem } from './healthcare-ecosystem/healthcare-ecosystem';
+import { GetStarted } from './get-started/get-started';
+import { TrustCarePreview } from './trust-care-preview/trust-care-preview';
+import { SpecialityCare } from './speciality-care/speciality-care';
+import { AppFeaturesPreview } from './app-features-preview/app-features-preview';
+import { RegistrationForm } from './registration-form/registration-form';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, Home, HealthcareEcosystem, GetStarted, TrustCarePreview, SpecialityCare, AppFeaturesPreview, RegistrationForm],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
