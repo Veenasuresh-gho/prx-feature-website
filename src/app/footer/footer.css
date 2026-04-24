@@ -1,10 +1,11 @@
 /* PRX.care Footer Component Styles */
 
 .footer {
-  background-color: #2d3a6b;
+  background-color: #344C85;
   color: #ffffff;
   font-family: 'Segoe UI', sans-serif;
   font-size: 14px;
+  
 }
 
 /* ─── Newsletter ─── */
@@ -137,6 +138,11 @@
   align-items: center;
 }
 
+.brand-logo img {
+ width: 56px;
+ height: auto;
+}
+
 .brand-tagline {
   font-size: 15px;
   font-style: italic;
@@ -161,24 +167,9 @@
   gap: 10px;
 }
 
-.social-icon {
+.social-icons img{
   width: 36px;
   height: 36px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-  transition: opacity 0.2s;
-
-  &.linkedin {
-    background-color: #e6a817;
-    color: #ffffff;
-  }
-
-  &:hover {
-    opacity: 0.85;
-  }
 }
 
 /* ─── App Download ─── */
@@ -206,8 +197,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 98px;
-  height: 98px;
+   width: 160px;  
+  height: 160px;
 
   svg {
     width: 90px;
@@ -220,7 +211,11 @@
   gap: 10px;
 }
 
+
 .store-badge {
+   min-width: 160px;  /* increase width */
+  justify-content: center;
+  padding: 10px;  /* adjust spacing */
   display: flex;
   align-items: center;
   gap: 8px;
@@ -236,8 +231,8 @@
     background: #1a1a1a;
   }
 
-  svg {
-    flex-shrink: 0;
+  img {
+   width: 20px;
   }
 }
 
@@ -299,7 +294,7 @@
 
 /* ─── Bottom Bar ─── */
 .bottom-bar {
-  background-color: #252f5a;
+  background-color: #344C85;
   padding: 16px 60px;
   display: flex;
   justify-content: space-between;
@@ -317,6 +312,11 @@
   display: flex;
   align-items: center;
   gap: 8px;
+}
+
+.app-store img{
+  filter: brightness(0) invert(1);
+  width: 24px;
 }
 
 .contact-link {
