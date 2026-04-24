@@ -10,21 +10,5 @@ import { CommonModule } from '@angular/common';
 })
 export class Home {
 
-  isMenuOpen = false;
-
-  toggleMobile() {
-    this.isMenuOpen = !this.isMenuOpen;
-  }
-
-  closeMenu() {
-    this.isMenuOpen = false;
-  }
-
-  @HostListener('document:click', ['$event'])
-  onClickOutside(event: any) {
-    const clickedInside = event.target.closest('.navbar');
-    if (!clickedInside) {
-      this.closeMenu();
-    }
-  }
+ 
 }

@@ -1,0 +1,68 @@
+<header class="navbar">
+    <div class="navbar__container">
+
+        <a href="/" class="navbar__logo" aria-label="PRx Home">
+            <img src="/PRx-Logo.png" />
+        </a>
+
+        <!-- Desktop Nav -->
+        <nav class="navbar__nav">
+            <div class="navbar__nav-item">
+                <button class="navbar__nav-link">
+                    For Patients
+                    <svg class="chevron" viewBox="0 0 24 24" fill="none">
+                        <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </button>
+                <div class="navbar__dropdown">
+                    <a href="/find-doctor">Find a Doctor</a>
+                    <a href="/book-appointment">Book Appointment</a>
+                    <a href="/medical-records">Medical Records</a>
+                    <a href="/home-care">Home Care</a>
+                </div>
+            </div>
+
+            <div class="navbar__nav-item">
+                <button class="navbar__nav-link">
+                    For Providers
+                    <svg class="chevron" viewBox="0 0 24 24" fill="none">
+                        <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </button>
+                <div class="navbar__dropdown">
+                    <a href="/join-network">Join Network</a>
+                    <a href="/hospital-login">Hospital Login</a>
+                    <a href="/lab-login">Lab Login</a>
+                    <a href="/request-demo">Request Demo</a>
+                </div>
+            </div>
+
+            <a href="/abdm" class="navbar__nav-link">ABDM</a>
+        </nav>
+
+        <!-- Desktop CTAs -->
+        <div class="navbar__actions">
+            <a href="/download" class="nb-btn nb-btn--download">Download App</a>
+            <a href="/get-started" class="nb-btn nb-btn--cta">Get Started</a>
+        </div>
+
+        <!-- Hamburger -->
+        <button class="navbar__hamburger" (click)="toggleMobile()" [class.open]="isMenuOpen"
+            [attr.aria-expanded]="isMenuOpen"> <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </div>
+
+    <!-- Mobile Drawer -->
+    <div class="navbar__mobile" id="mobileMenu">
+        <a href="/for-patients">For Patients</a>
+        <a href="/for-providers">For Providers</a>
+        <a href="/abdm">ABDM</a>
+        <div class="mobile-divider"></div>
+        <a href="/download" class="mobile-btn mobile-btn--dl">Download App</a>
+        <a href="/get-started" class="mobile-btn mobile-btn--cta">Get Started</a>
+    </div>
+</header>
