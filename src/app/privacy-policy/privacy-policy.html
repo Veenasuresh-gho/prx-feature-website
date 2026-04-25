@@ -2,8 +2,8 @@
 <header class="legal-hero">
   <div class="container">
     <div class="hero-eyebrow">⚕️ Legal Documents</div>
-    <h1>Privacy, Terms &amp; Policies</h1>
-    <p>At PRx.care, transparency is foundational to the trust our patients and providers place in us. Read our commitments to your data, rights, and services.</p>
+    <h1>Privacy Policy</h1>
+    <p>At PRx.care, transparency is foundational to the trust our patients and providers place in us. Read our commitments to your data, rights, and security.</p>
     <div class="hero-badges">
       <span class="hero-badge">🔒 HIPAA Compliant</span>
       <span class="hero-badge">🛡️ GDPR Aligned</span>
@@ -13,574 +13,216 @@
   </div>
 </header>
 
-<!-- ═══ TAB NAVIGATION ═══ -->
-<div class="tab-nav-wrap">
-  <div class="tab-nav">
-    <button class="tab-btn" [class.active]="isTabActive('privacy')"  (click)="switchTab('privacy')">🔒 Privacy Policy</button>
-    <button class="tab-btn" [class.active]="isTabActive('terms')"    (click)="switchTab('terms')">📋 Terms &amp; Conditions</button>
-    <button class="tab-btn" [class.active]="isTabActive('shipping')" (click)="switchTab('shipping')">🚚 Shipping &amp; Delivery</button>
-  </div>
-</div>
-
 <!-- ═══ BODY ═══ -->
 <main class="legal-body">
   <div class="container">
-    <div class="legal-layout">
 
-      <!-- ── SIDEBAR TOC ── -->
-      <aside class="toc-sidebar">
-        <div class="toc-header">On This Page</div>
-        <nav>
-          <button
-            *ngFor="let item of currentToc"
-            class="toc-link"
-            [class.active]="isTocActive(item.id)"
-            (click)="scrollToSection(item.id)">
-            {{ item.label }}
-          </button>
-        </nav>
-        <div class="toc-actions">
-          <button class="toc-print-btn" (click)="printPage()">🖨️ Print / Save PDF</button>
+    <!-- Overview -->
+    <div id="pp-overview" class="section-block">
+      <div class="doc-overview">
+        <h2>Privacy Policy</h2>
+        <p>PRx.care is India's integrated health journey management platform. We collect and use your information solely to deliver exceptional, personalised healthcare services. This policy governs how we handle your data — with security, transparency, and respect for your rights at every step.</p>
+        <div class="overview-cards">
+          <div class="ov-card"><div class="ov-icon">🔒</div><div class="ov-title">Data Security</div><div class="ov-desc">End-to-end encryption and industry-grade access controls.</div></div>
+          <div class="ov-card"><div class="ov-icon">🚫</div><div class="ov-title">No Data Selling</div><div class="ov-desc">We never sell, rent, or monetise your personal data.</div></div>
+          <div class="ov-card"><div class="ov-icon">✋</div><div class="ov-title">Your Control</div><div class="ov-desc">Access, correct, or delete your data at any time.</div></div>
         </div>
-      </aside>
+      </div>
+      <div class="eff-date-bar"><span>📅</span> Effective Date: 22 April 2026 &nbsp;|&nbsp; Last Updated: 22 April 2026</div>
+    </div>
 
-      <div class="legal-content">
+    <!-- 1. Information We Collect -->
+    <div id="pp-collect" class="section-block">
+      <h2 class="sec-title"><span class="sec-num">1</span> Information We Collect</h2>
+      <p class="sec-text">We collect the minimum information necessary to provide you with safe, effective, and personalised healthcare services.</p>
+      <div class="sub-section">
+        <h3 class="sub-title">Personal Identification Information</h3>
+        <ul class="legal-list">
+          <li>Full name, date of birth, and gender</li>
+          <li>Email address and mobile phone number</li>
+          <li>Address, pin code, and geographic location (when you grant permission)</li>
+          <li>Government-issued IDs such as Aadhaar number or ABHA Health ID</li>
+          <li>Profile photograph (optional)</li>
+        </ul>
+      </div>
+      <div class="sub-section">
+        <h3 class="sub-title">Health &amp; Medical Information</h3>
+        <ul class="legal-list">
+          <li>Medical history, diagnoses, and ongoing conditions</li>
+          <li>Prescriptions (e-prescriptions) and medication lists</li>
+          <li>Lab and diagnostic reports uploaded or generated via PRx</li>
+          <li>Appointment records, consultation notes, and doctor feedback</li>
+          <li>Vital signs and health metrics (when entered via the app)</li>
+          <li>Insurance information and health plan details</li>
+        </ul>
+      </div>
+      <div class="sub-section">
+        <h3 class="sub-title">Financial Information</h3>
+        <ul class="legal-list">
+          <li>Payment method details (processed by PCI-DSS compliant third-party gateways)</li>
+          <li>Transaction history for appointments, pharmacy orders, and home care bookings</li>
+        </ul>
+      </div>
+      <div class="sub-section">
+        <h3 class="sub-title">Technical &amp; Usage Information</h3>
+        <ul class="legal-list">
+          <li>IP address, device type, operating system, and browser version</li>
+          <li>App usage patterns, feature interactions, and session duration</li>
+          <li>Crash logs and error reports to improve platform stability</li>
+          <li>Cookies, local storage, and analytics identifiers (see Section 8)</li>
+        </ul>
+      </div>
+      <div class="sub-section">
+        <h3 class="sub-title">Provider Information</h3>
+        <ul class="legal-list">
+          <li>Facility name, type, registration number, and licensing information</li>
+          <li>Contact person details and designated PRx administrator credentials</li>
+          <li>Bank account / settlement details for payment disbursement</li>
+        </ul>
+      </div>
+    </div>
 
-        <!-- ══════════════════════════════════
-             PRIVACY POLICY
-        ══════════════════════════════════ -->
-        <div class="doc-panel" [class.active]="isTabActive('privacy')">
+    <!-- 2. How We Use Your Data -->
+    <div id="pp-use" class="section-block">
+      <h2 class="sec-title"><span class="sec-num">2</span> How We Use Your Data</h2>
+      <p class="sec-text">Every piece of data we collect serves a defined, legitimate purpose.</p>
+      <ul class="legal-list legal-list--check">
+        <li><strong>Deliver core healthcare services:</strong> facilitate doctor consultations, lab test bookings, pharmacy orders, and home care services.</li>
+        <li><strong>Personalise your experience:</strong> display relevant providers, recommend specialists, and surface health insights.</li>
+        <li><strong>Process transactions securely:</strong> handle payments, generate receipts, manage refunds, and maintain financial history.</li>
+        <li><strong>Send service communications:</strong> appointment confirmations, reminders, prescription notifications, and delivery updates.</li>
+        <li><strong>Support ABDM integration:</strong> link your ABHA ID to enable interoperable health record sharing.</li>
+        <li><strong>Improve and secure our platform:</strong> analyse aggregate usage to fix bugs, improve UX, and detect fraud.</li>
+        <li><strong>Comply with legal obligations:</strong> fulfil requirements under the IT Act 2000, DPDP Act 2023, and ABDM guidelines.</li>
+        <li><strong>Provide customer support:</strong> respond to your queries, complaints, and feedback.</li>
+      </ul>
+      <div class="highlight-box">
+        <p><strong>No Marketing Without Consent:</strong> We will never send you unsolicited promotional communications. You may opt out at any time from account settings.</p>
+      </div>
+    </div>
 
-          <div id="pp-overview" class="section-block">
-            <div class="doc-overview">
-              <h2>Privacy Policy</h2>
-              <p>PRx.care is India's integrated health journey management platform. We collect and use your information solely to deliver exceptional, personalised healthcare services. This policy governs how we handle your data — with security, transparency, and respect for your rights at every step.</p>
-              <div class="overview-cards">
-                <div class="ov-card"><div class="ov-icon">🔒</div><div class="ov-title">Data Security</div><div class="ov-desc">End-to-end encryption and industry-grade access controls.</div></div>
-                <div class="ov-card"><div class="ov-icon">🚫</div><div class="ov-title">No Data Selling</div><div class="ov-desc">We never sell, rent, or monetise your personal data.</div></div>
-                <div class="ov-card"><div class="ov-icon">✋</div><div class="ov-title">Your Control</div><div class="ov-desc">Access, correct, or delete your data at any time.</div></div>
-              </div>
-            </div>
-            <div class="eff-date-bar"><span>📅</span> Effective Date: 22 April 2026 &nbsp;|&nbsp; Last Updated: 22 April 2026</div>
-          </div>
+    <!-- 3. Data Sharing -->
+    <div id="pp-sharing" class="section-block">
+      <h2 class="sec-title"><span class="sec-num">3</span> Data Sharing</h2>
+      <p class="sec-text">Your data is shared only on a strict need-to-know basis to facilitate the services you have requested.</p>
+      <div class="sub-section">
+        <h3 class="sub-title">Healthcare Providers Within the PRx Network</h3>
+        <p class="sec-text">Verified doctors, clinics, labs, and pharmacies receive only the information required to deliver the specific service you have booked. All providers are bound by confidentiality agreements.</p>
+      </div>
+      <div class="sub-section">
+        <h3 class="sub-title">Payment Service Providers</h3>
+        <p class="sec-text">PCI-DSS compliant payment gateways receive only the payment data required to complete your transaction and are contractually prohibited from using it for any other purpose.</p>
+      </div>
+      <div class="sub-section">
+        <h3 class="sub-title">ABDM / NHA (National Health Authority)</h3>
+        <p class="sec-text">Where you have explicitly linked your ABHA ID and consented to health record sharing, certain data may be exchanged within the ABDM ecosystem.</p>
+      </div>
+      <div class="sub-section">
+        <h3 class="sub-title">Legal &amp; Regulatory Authorities</h3>
+        <p class="sec-text">We may disclose information to government agencies or law enforcement bodies when required by law or a valid court order.</p>
+      </div>
+      <div class="highlight-box">
+        <p>🚫 <strong>We do not sell, rent, lease, or trade your personal or health data to any third party for commercial or marketing purposes — ever.</strong></p>
+      </div>
+    </div>
 
-          <div id="pp-collect" class="section-block">
-            <h2 class="sec-title"><span class="sec-num">1</span> Information We Collect</h2>
-            <p class="sec-text">We collect the minimum information necessary to provide you with safe, effective, and personalised healthcare services.</p>
-            <div class="sub-section">
-              <h3 class="sub-title">Personal Identification Information</h3>
-              <ul class="legal-list">
-                <li>Full name, date of birth, and gender</li>
-                <li>Email address and mobile phone number</li>
-                <li>Address, pin code, and geographic location (when you grant permission)</li>
-                <li>Government-issued IDs such as Aadhaar number or ABHA Health ID</li>
-                <li>Profile photograph (optional)</li>
-              </ul>
-            </div>
-            <div class="sub-section">
-              <h3 class="sub-title">Health &amp; Medical Information</h3>
-              <ul class="legal-list">
-                <li>Medical history, diagnoses, and ongoing conditions</li>
-                <li>Prescriptions (e-prescriptions) and medication lists</li>
-                <li>Lab and diagnostic reports uploaded or generated via PRx</li>
-                <li>Appointment records, consultation notes, and doctor feedback</li>
-                <li>Vital signs and health metrics (when entered via the app)</li>
-                <li>Insurance information and health plan details</li>
-              </ul>
-            </div>
-            <div class="sub-section">
-              <h3 class="sub-title">Financial Information</h3>
-              <ul class="legal-list">
-                <li>Payment method details (processed by PCI-DSS compliant third-party gateways)</li>
-                <li>Transaction history for appointments, pharmacy orders, and home care bookings</li>
-              </ul>
-            </div>
-            <div class="sub-section">
-              <h3 class="sub-title">Technical &amp; Usage Information</h3>
-              <ul class="legal-list">
-                <li>IP address, device type, operating system, and browser version</li>
-                <li>App usage patterns, feature interactions, and session duration</li>
-                <li>Crash logs and error reports to improve platform stability</li>
-                <li>Cookies, local storage, and analytics identifiers (see Section 8)</li>
-              </ul>
-            </div>
-            <div class="sub-section">
-              <h3 class="sub-title">Provider Information</h3>
-              <ul class="legal-list">
-                <li>Facility name, type, registration number, and licensing information</li>
-                <li>Contact person details and designated PRx administrator credentials</li>
-                <li>Bank account / settlement details for payment disbursement</li>
-              </ul>
-            </div>
-          </div>
+    <!-- 4. Data Security -->
+    <div id="pp-security" class="section-block">
+      <h2 class="sec-title"><span class="sec-num">4</span> Data Security</h2>
+      <ul class="legal-list">
+        <li><strong>AES-256 encryption</strong> for all health data at rest; TLS 1.3 for data in transit.</li>
+        <li><strong>Role-based access controls (RBAC)</strong> ensuring staff and providers access only relevant data.</li>
+        <li><strong>Multi-factor authentication (MFA)</strong> for all provider and administrator accounts.</li>
+        <li><strong>Regular penetration testing</strong> and security audits by independent third-party experts.</li>
+        <li><strong>ISO 27001-aligned</strong> information security management practices.</li>
+        <li><strong>Incident response plan</strong> — affected users notified within 72 hours of a data breach.</li>
+      </ul>
+      <div class="warning-box">
+        <p>⚠️ <strong>Important:</strong> No digital system can guarantee absolute security. Report any suspicious activity to <strong>support&#64;prx.care</strong> immediately.</p>
+      </div>
+    </div>
 
-          <div id="pp-use" class="section-block">
-            <h2 class="sec-title"><span class="sec-num">2</span> How We Use Your Data</h2>
-            <p class="sec-text">Every piece of data we collect serves a defined, legitimate purpose.</p>
-            <ul class="legal-list legal-list--check">
-              <li><strong>Deliver core healthcare services:</strong> facilitate doctor consultations, lab test bookings, pharmacy orders, and home care services.</li>
-              <li><strong>Personalise your experience:</strong> display relevant providers, recommend specialists, and surface health insights.</li>
-              <li><strong>Process transactions securely:</strong> handle payments, generate receipts, manage refunds, and maintain financial history.</li>
-              <li><strong>Send service communications:</strong> appointment confirmations, reminders, prescription notifications, and delivery updates.</li>
-              <li><strong>Support ABDM integration:</strong> link your ABHA ID to enable interoperable health record sharing.</li>
-              <li><strong>Improve and secure our platform:</strong> analyse aggregate usage to fix bugs, improve UX, and detect fraud.</li>
-              <li><strong>Comply with legal obligations:</strong> fulfil requirements under the IT Act 2000, DPDP Act 2023, and ABDM guidelines.</li>
-              <li><strong>Provide customer support:</strong> respond to your queries, complaints, and feedback.</li>
-            </ul>
-            <div class="highlight-box">
-              <p><strong>No Marketing Without Consent:</strong> We will never send you unsolicited promotional communications. You may opt out at any time from account settings.</p>
-            </div>
-          </div>
+    <!-- 5. Your Rights -->
+    <div id="pp-rights" class="section-block">
+      <h2 class="sec-title"><span class="sec-num">5</span> Your Rights</h2>
+      <ul class="legal-list legal-list--check">
+        <li><strong>Right to Access:</strong> Request a copy of all personal data we hold about you.</li>
+        <li><strong>Right to Correction:</strong> Ask us to correct inaccurate or incomplete information.</li>
+        <li><strong>Right to Erasure:</strong> Request deletion of your account and associated data.</li>
+        <li><strong>Right to Restriction:</strong> Ask us to limit processing of your data in certain circumstances.</li>
+        <li><strong>Right to Data Portability:</strong> Receive your data in a structured, machine-readable format.</li>
+        <li><strong>Right to Withdraw Consent:</strong> Revoke any previously given consent at any time.</li>
+        <li><strong>Right to Object:</strong> Object to certain types of processing, including profiling.</li>
+        <li><strong>Right to Grievance Redressal:</strong> Lodge a complaint with our Data Protection Officer.</li>
+      </ul>
+      <p class="sec-text">Contact our DPO at <strong>admin&#64;gho.care</strong> or <strong>support&#64;prx.care</strong>. We will respond within 30 days.</p>
+    </div>
 
-          <div id="pp-sharing" class="section-block">
-            <h2 class="sec-title"><span class="sec-num">3</span> Data Sharing</h2>
-            <p class="sec-text">Your data is shared only on a strict need-to-know basis to facilitate the services you have requested.</p>
-            <div class="sub-section">
-              <h3 class="sub-title">Healthcare Providers Within the PRx Network</h3>
-              <p class="sec-text">Verified doctors, clinics, labs, and pharmacies receive only the information required to deliver the specific service you have booked. All providers are bound by confidentiality agreements.</p>
-            </div>
-            <div class="sub-section">
-              <h3 class="sub-title">Payment Service Providers</h3>
-              <p class="sec-text">PCI-DSS compliant payment gateways receive only the payment data required to complete your transaction and are contractually prohibited from using it for any other purpose.</p>
-            </div>
-            <div class="sub-section">
-              <h3 class="sub-title">ABDM / NHA (National Health Authority)</h3>
-              <p class="sec-text">Where you have explicitly linked your ABHA ID and consented to health record sharing, certain data may be exchanged within the ABDM ecosystem.</p>
-            </div>
-            <div class="sub-section">
-              <h3 class="sub-title">Legal &amp; Regulatory Authorities</h3>
-              <p class="sec-text">We may disclose information to government agencies or law enforcement bodies when required by law or a valid court order.</p>
-            </div>
-            <div class="highlight-box">
-              <p>🚫 <strong>We do not sell, rent, lease, or trade your personal or health data to any third party for commercial or marketing purposes — ever.</strong></p>
-            </div>
-          </div>
+    <!-- 6. Data Retention -->
+    <div id="pp-retention" class="section-block">
+      <h2 class="sec-title"><span class="sec-num">6</span> Data Retention</h2>
+      <div class="legal-table-wrap">
+        <table class="legal-table">
+          <thead><tr><th>Data Category</th><th>Retention Period</th><th>Basis</th></tr></thead>
+          <tbody>
+            <tr><td>Account &amp; Profile Data</td><td>Duration of account + 3 years after closure</td><td>Service delivery &amp; legal obligation</td></tr>
+            <tr><td>Medical Records &amp; Health Data</td><td>Minimum 7 years (as per MCI guidelines)</td><td>Medical &amp; legal requirement</td></tr>
+            <tr><td>Appointment &amp; Consultation Records</td><td>7 years</td><td>Healthcare regulatory compliance</td></tr>
+            <tr><td>Transaction &amp; Financial Data</td><td>8 years</td><td>GST &amp; income tax compliance</td></tr>
+            <tr><td>Usage &amp; Analytics Logs</td><td>24 months (anonymised thereafter)</td><td>Platform improvement</td></tr>
+            <tr><td>Communications &amp; Support Records</td><td>3 years</td><td>Customer service</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
 
-          <div id="pp-security" class="section-block">
-            <h2 class="sec-title"><span class="sec-num">4</span> Data Security</h2>
-            <ul class="legal-list">
-              <li><strong>AES-256 encryption</strong> for all health data at rest; TLS 1.3 for data in transit.</li>
-              <li><strong>Role-based access controls (RBAC)</strong> ensuring staff and providers access only relevant data.</li>
-              <li><strong>Multi-factor authentication (MFA)</strong> for all provider and administrator accounts.</li>
-              <li><strong>Regular penetration testing</strong> and security audits by independent third-party experts.</li>
-              <li><strong>ISO 27001-aligned</strong> information security management practices.</li>
-              <li><strong>Incident response plan</strong> — affected users notified within 72 hours of a data breach.</li>
-            </ul>
-            <div class="warning-box">
-              <p>⚠️ <strong>Important:</strong> No digital system can guarantee absolute security. Report any suspicious activity to <strong>support&#64;prx.care</strong> immediately.</p>
-            </div>
-          </div>
+    <!-- 7. Children's Privacy -->
+    <div id="pp-children" class="section-block">
+      <h2 class="sec-title"><span class="sec-num">7</span> Children's Privacy</h2>
+      <p class="sec-text">PRx.care is not directed at children under 18 years of age. We do not knowingly collect personal data from minors without verified parental or guardian consent. If you believe a minor's data has been collected without appropriate consent, contact us immediately at <strong>support&#64;prx.care</strong>.</p>
+    </div>
 
-          <div id="pp-rights" class="section-block">
-            <h2 class="sec-title"><span class="sec-num">5</span> Your Rights</h2>
-            <ul class="legal-list legal-list--check">
-              <li><strong>Right to Access:</strong> Request a copy of all personal data we hold about you.</li>
-              <li><strong>Right to Correction:</strong> Ask us to correct inaccurate or incomplete information.</li>
-              <li><strong>Right to Erasure:</strong> Request deletion of your account and associated data.</li>
-              <li><strong>Right to Restriction:</strong> Ask us to limit processing of your data in certain circumstances.</li>
-              <li><strong>Right to Data Portability:</strong> Receive your data in a structured, machine-readable format.</li>
-              <li><strong>Right to Withdraw Consent:</strong> Revoke any previously given consent at any time.</li>
-              <li><strong>Right to Object:</strong> Object to certain types of processing, including profiling.</li>
-              <li><strong>Right to Grievance Redressal:</strong> Lodge a complaint with our Data Protection Officer.</li>
-            </ul>
-            <p class="sec-text">Contact our DPO at <strong>admin&#64;gho.care</strong> or <strong>support&#64;prx.care</strong>. We will respond within 30 days.</p>
-          </div>
+    <!-- 8. Cookies -->
+    <div id="pp-cookies" class="section-block">
+      <h2 class="sec-title"><span class="sec-num">8</span> Cookies &amp; Tracking Technologies</h2>
+      <div class="legal-table-wrap">
+        <table class="legal-table">
+          <thead><tr><th>Cookie Type</th><th>Purpose</th><th>Opt-Out</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Essential Cookies</strong></td><td>Authentication, security, and core platform functionality</td><td><span class="status-chip chip-orange">Required</span></td></tr>
+            <tr><td><strong>Performance Cookies</strong></td><td>Measuring page load speeds and identifying technical issues</td><td><span class="status-chip chip-green">Optional</span></td></tr>
+            <tr><td><strong>Functionality Cookies</strong></td><td>Remembering your preferences (language, location)</td><td><span class="status-chip chip-green">Optional</span></td></tr>
+            <tr><td><strong>Analytics Cookies</strong></td><td>Aggregated usage data to improve the platform</td><td><span class="status-chip chip-green">Optional</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
 
-          <div id="pp-retention" class="section-block">
-            <h2 class="sec-title"><span class="sec-num">6</span> Data Retention</h2>
-            <div class="legal-table-wrap">
-              <table class="legal-table">
-                <thead><tr><th>Data Category</th><th>Retention Period</th><th>Basis</th></tr></thead>
-                <tbody>
-                  <tr><td>Account &amp; Profile Data</td><td>Duration of account + 3 years after closure</td><td>Service delivery &amp; legal obligation</td></tr>
-                  <tr><td>Medical Records &amp; Health Data</td><td>Minimum 7 years (as per MCI guidelines)</td><td>Medical &amp; legal requirement</td></tr>
-                  <tr><td>Appointment &amp; Consultation Records</td><td>7 years</td><td>Healthcare regulatory compliance</td></tr>
-                  <tr><td>Transaction &amp; Financial Data</td><td>8 years</td><td>GST &amp; income tax compliance</td></tr>
-                  <tr><td>Usage &amp; Analytics Logs</td><td>24 months (anonymised thereafter)</td><td>Platform improvement</td></tr>
-                  <tr><td>Communications &amp; Support Records</td><td>3 years</td><td>Customer service</td></tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
+    <!-- 9. International Transfers -->
+    <div id="pp-transfers" class="section-block">
+      <h2 class="sec-title"><span class="sec-num">9</span> International Data Transfers</h2>
+      <p class="sec-text">PRx.care primarily stores and processes data within India. When data is transferred internationally, we ensure equivalent protection through Standard Contractual Clauses, binding corporate rules, and Data Processing Agreements (DPAs) with all international sub-processors.</p>
+    </div>
 
-          <div id="pp-children" class="section-block">
-            <h2 class="sec-title"><span class="sec-num">7</span> Children's Privacy</h2>
-            <p class="sec-text">PRx.care is not directed at children under 18 years of age. We do not knowingly collect personal data from minors without verified parental or guardian consent. If you believe a minor's data has been collected without appropriate consent, contact us immediately at <strong>support&#64;prx.care</strong>.</p>
-          </div>
+    <!-- 10. Policy Updates -->
+    <div id="pp-changes" class="section-block">
+      <h2 class="sec-title"><span class="sec-num">10</span> Policy Updates</h2>
+      <p class="sec-text">When we make material changes, we will display a prominent notice on the platform, send an email/push notification at least 14 days before changes take effect, and maintain an archive of prior versions.</p>
+    </div>
 
-          <div id="pp-cookies" class="section-block">
-            <h2 class="sec-title"><span class="sec-num">8</span> Cookies &amp; Tracking Technologies</h2>
-            <div class="legal-table-wrap">
-              <table class="legal-table">
-                <thead><tr><th>Cookie Type</th><th>Purpose</th><th>Opt-Out</th></tr></thead>
-                <tbody>
-                  <tr><td><strong>Essential Cookies</strong></td><td>Authentication, security, and core platform functionality</td><td><span class="status-chip chip-orange">Required</span></td></tr>
-                  <tr><td><strong>Performance Cookies</strong></td><td>Measuring page load speeds and identifying technical issues</td><td><span class="status-chip chip-green">Optional</span></td></tr>
-                  <tr><td><strong>Functionality Cookies</strong></td><td>Remembering your preferences (language, location)</td><td><span class="status-chip chip-green">Optional</span></td></tr>
-                  <tr><td><strong>Analytics Cookies</strong></td><td>Aggregated usage data to improve the platform</td><td><span class="status-chip chip-green">Optional</span></td></tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
+    <!-- 11. Contact -->
+    <div id="pp-contact" class="section-block">
+      <h2 class="sec-title"><span class="sec-num">11</span> Contact Us</h2>
+      <div class="contact-card">
+        <h3>Get in Touch — PRx Privacy Team</h3>
+        <div class="contact-grid">
+          <div class="contact-item"><span class="contact-icon">📧</span><div><div class="contact-label">Email (Privacy)</div><div class="contact-value"><a href="mailto:admin@gho.care">admin&#64;gho.care</a></div></div></div>
+          <div class="contact-item"><span class="contact-icon">📧</span><div><div class="contact-label">Email (Support)</div><div class="contact-value"><a href="mailto:support@prx.care">support&#64;prx.care</a></div></div></div>
+          <div class="contact-item"><span class="contact-icon">📞</span><div><div class="contact-label">Phone</div><div class="contact-value">+91 484 452 4780<br/>+91 999 544 1220</div></div></div>
+          <div class="contact-item"><span class="contact-icon">📍</span><div><div class="contact-label">Registered Office</div><div class="contact-value">PRx Healthcare Pvt. Ltd., Kerala, India</div></div></div>
+        </div>
+      </div>
+    </div>
 
-          <div id="pp-transfers" class="section-block">
-            <h2 class="sec-title"><span class="sec-num">9</span> International Data Transfers</h2>
-            <p class="sec-text">PRx.care primarily stores and processes data within India. When data is transferred internationally, we ensure equivalent protection through Standard Contractual Clauses, binding corporate rules, and Data Processing Agreements (DPAs) with all international sub-processors.</p>
-          </div>
-
-          <div id="pp-changes" class="section-block">
-            <h2 class="sec-title"><span class="sec-num">10</span> Policy Updates</h2>
-            <p class="sec-text">When we make material changes, we will display a prominent notice on the platform, send an email/push notification at least 14 days before changes take effect, and maintain an archive of prior versions.</p>
-          </div>
-
-          <div id="pp-contact" class="section-block">
-            <h2 class="sec-title"><span class="sec-num">11</span> Contact Us</h2>
-            <div class="contact-card">
-              <h3>Get in Touch — PRx Privacy Team</h3>
-              <div class="contact-grid">
-                <div class="contact-item"><span class="contact-icon">📧</span><div><div class="contact-label">Email (Privacy)</div><div class="contact-value"><a href="mailto:admin@gho.care">admin&#64;gho.care</a></div></div></div>
-                <div class="contact-item"><span class="contact-icon">📧</span><div><div class="contact-label">Email (Support)</div><div class="contact-value"><a href="mailto:support@prx.care">support&#64;prx.care</a></div></div></div>
-                <div class="contact-item"><span class="contact-icon">📞</span><div><div class="contact-label">Phone</div><div class="contact-value">+91 484 452 4780<br/>+91 999 544 1220</div></div></div>
-                <div class="contact-item"><span class="contact-icon">📍</span><div><div class="contact-label">Registered Office</div><div class="contact-value">PRx Healthcare Pvt. Ltd., Kerala, India</div></div></div>
-              </div>
-            </div>
-          </div>
-
-        </div><!-- /privacy panel -->
-
-
-        <!-- ══════════════════════════════════
-             TERMS & CONDITIONS
-        ══════════════════════════════════ -->
-        <div class="doc-panel" [class.active]="isTabActive('terms')">
-
-          <div id="tc-overview" class="section-block">
-            <div class="doc-overview">
-              <h2>Terms &amp; Conditions</h2>
-              <p>These Terms &amp; Conditions govern your access to and use of the PRx.care platform — including our website, iOS app, and Android app. By creating an account or using PRx.care, you agree to be bound by these terms.</p>
-              <div class="overview-cards">
-                <div class="ov-card"><div class="ov-icon">🏥</div><div class="ov-title">Healthcare Platform</div><div class="ov-desc">A digital facilitator — not a medical provider.</div></div>
-                <div class="ov-card"><div class="ov-icon">🤝</div><div class="ov-title">Fair Use</div><div class="ov-desc">Use our platform legally and in good faith.</div></div>
-                <div class="ov-card"><div class="ov-icon">⚖️</div><div class="ov-title">Indian Law</div><div class="ov-desc">Governed by the laws of the Republic of India.</div></div>
-              </div>
-            </div>
-            <div class="eff-date-bar"><span>📅</span> Effective Date: 22 April 2026 &nbsp;|&nbsp; Governing Jurisdiction: India</div>
-          </div>
-
-          <div id="tc-eligibility" class="section-block">
-            <h2 class="sec-title"><span class="sec-num">1</span> Eligibility</h2>
-            <ul class="legal-list">
-              <li>Be at least 18 years of age, or have valid parental/guardian consent if using a family account</li>
-              <li>Have the legal capacity to enter into a binding agreement under Indian law</li>
-              <li>Not be barred from using PRx.care under any applicable laws or prior termination</li>
-              <li>Provide accurate, complete, and up-to-date registration information</li>
-            </ul>
-          </div>
-
-          <div id="tc-platform" class="section-block">
-            <h2 class="sec-title"><span class="sec-num">2</span> Platform Services</h2>
-            <ul class="legal-list">
-              <li><strong>Appointment Booking:</strong> Schedule in-person and virtual consultations with verified doctors and specialists</li>
-              <li><strong>Telemedicine / Virtual Consultations:</strong> Secure video and audio consultations with qualified medical professionals</li>
-              <li><strong>Lab &amp; Diagnostic Services:</strong> Book tests, home sample collection, and receive digital reports</li>
-              <li><strong>Pharmacy &amp; Medicine Delivery:</strong> Order medicines through our verified pharmacy network</li>
-              <li><strong>Home Care Services:</strong> Book qualified nurses, physiotherapists, and other home healthcare professionals</li>
-              <li><strong>Medical Records Management:</strong> Securely store, manage, and share health records via ABDM-compliant infrastructure</li>
-              <li><strong>Second Medical Opinions:</strong> Access to specialist second opinions via our GlobalHealthOpinion network</li>
-            </ul>
-            <div class="highlight-box">
-              <p><strong>PRx.care is a technology facilitator.</strong> We connect you with healthcare professionals but do not ourselves provide medical advice, diagnosis, or treatment.</p>
-            </div>
-          </div>
-
-          <div id="tc-accounts" class="section-block">
-            <h2 class="sec-title"><span class="sec-num">3</span> User Accounts</h2>
-            <ul class="legal-list">
-              <li>You are responsible for maintaining the confidentiality of your account credentials and for all activities conducted under your account.</li>
-              <li>Immediately notify us of any unauthorised access at <strong>support&#64;prx.care</strong>.</li>
-              <li>Each person may maintain one primary account. Creating multiple accounts to circumvent restrictions is prohibited.</li>
-              <li>You may add family members under the Family Accounts feature; you are responsible for ensuring each member's information is accurate and consented to.</li>
-            </ul>
-          </div>
-
-          <div id="tc-obligations" class="section-block">
-            <h2 class="sec-title"><span class="sec-num">4</span> User Obligations</h2>
-            <ul class="legal-list legal-list--check">
-              <li>Provide accurate, complete, and truthful information in your profile and during all interactions</li>
-              <li>Use the platform solely for lawful purposes and in accordance with all applicable Indian laws</li>
-              <li>Respect the privacy, safety, and dignity of healthcare providers and other platform users</li>
-              <li>Not engage in fraudulent activities, including submitting false prescriptions or misrepresenting identity</li>
-              <li>Not attempt to circumvent platform security, reverse-engineer software, or access unauthorised data</li>
-              <li>Comply with all applicable healthcare regulations, including prescription requirements for controlled medicines</li>
-            </ul>
-            <div class="warning-box">
-              <p>⚠️ Violations may result in immediate account suspension, content removal, and/or referral to law enforcement.</p>
-            </div>
-          </div>
-
-          <div id="tc-medical" class="section-block">
-            <h2 class="sec-title"><span class="sec-num">5</span> Medical Disclaimer</h2>
-            <ul class="legal-list">
-              <li>General health information on PRx.care is for informational purposes only and does not constitute medical advice.</li>
-              <li>All diagnoses, treatment plans, and prescriptions are the sole responsibility of the licensed medical professional you consult.</li>
-              <li>PRx.care does not endorse or guarantee the clinical judgement or outcomes of any specific provider on our network.</li>
-              <li>In any medical emergency, call 112 immediately. PRx.care is not an emergency medical service.</li>
-            </ul>
-          </div>
-
-          <div id="tc-appointments" class="section-block">
-            <h2 class="sec-title"><span class="sec-num">6</span> Appointments &amp; Bookings</h2>
-            <ul class="legal-list">
-              <li>Appointments are confirmed only after PRx.care confirmation. Cancellations must be made at least 2 hours before scheduled time for in-person consultations.</li>
-              <li>PRx.care is not responsible for provider cancellations, rescheduling, delays, or clinical outcomes.</li>
-              <li>No-shows (failure to attend without prior cancellation) may forfeit any advance payment made.</li>
-              <li>Recording virtual consultations without all parties' consent is strictly prohibited.</li>
-            </ul>
-          </div>
-
-          <div id="tc-payments" class="section-block">
-            <h2 class="sec-title"><span class="sec-num">7</span> Payments &amp; Refunds</h2>
-            <div class="sub-section">
-              <h3 class="sub-title">Payments</h3>
-              <ul class="legal-list">
-                <li>All payments are processed through PCI-DSS compliant payment gateways. PRx.care does not store your full card or UPI credentials.</li>
-                <li>Prices are indicative; the final fee is determined by the respective provider and may vary.</li>
-              </ul>
-            </div>
-            <div class="sub-section">
-              <h3 class="sub-title">Refunds</h3>
-              <ul class="legal-list">
-                <li><strong>Doctor Consultations:</strong> Full refund if cancelled ≥2 hours before appointment; 50% refund within 2 hours; no refund for no-shows.</li>
-                <li><strong>Lab Tests:</strong> Full refund if sample collection has not commenced.</li>
-                <li><strong>Pharmacy Orders:</strong> Governed by the Shipping &amp; Delivery Terms.</li>
-                <li><strong>Provider-initiated cancellations:</strong> Full refund within 5–7 business days.</li>
-              </ul>
-            </div>
-            <p class="sec-text">Refund timelines: 5–7 business days for debit/credit cards; 2–3 business days for UPI; PRx Wallet credits are typically instant.</p>
-          </div>
-
-          <div id="tc-ip" class="section-block">
-            <h2 class="sec-title"><span class="sec-num">8</span> Intellectual Property</h2>
-            <p class="sec-text">All intellectual property on PRx.care — including brand name, logos, UI design, written content, code, and databases — is the exclusive property of PRx Healthcare Pvt. Ltd. and is protected under applicable Indian and international IP laws.</p>
-            <ul class="legal-list">
-              <li>You are granted a limited, non-exclusive, non-transferable licence to access and use PRx.care for personal or authorised business purposes.</li>
-              <li>You may not reproduce, distribute, or commercially exploit any platform content without prior written consent from PRx.</li>
-            </ul>
-          </div>
-
-          <div id="tc-liability" class="section-block">
-            <h2 class="sec-title"><span class="sec-num">9</span> Limitation of Liability</h2>
-            <ul class="legal-list">
-              <li>PRx.care is not liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of the platform.</li>
-              <li>PRx.care's total aggregate liability shall not exceed the amount you paid to PRx in the 3 months preceding the incident.</li>
-              <li>PRx.care is not liable for acts or omissions of independent healthcare providers, including misdiagnosis or treatment outcomes.</li>
-            </ul>
-            <div class="warning-box">
-              <p>⚠️ Nothing in these terms limits liability for gross negligence, wilful misconduct, fraud, or death or personal injury caused directly by PRx Healthcare Pvt. Ltd.</p>
-            </div>
-          </div>
-
-          <div id="tc-termination" class="section-block">
-            <h2 class="sec-title"><span class="sec-num">10</span> Account Termination</h2>
-            <div class="sub-section">
-              <h3 class="sub-title">Termination by PRx</h3>
-              <p class="sec-text">We may suspend or terminate your account if you breach these Terms, engage in fraudulent or illegal activities, provide false information, or attempt to compromise platform security.</p>
-            </div>
-            <div class="sub-section">
-              <h3 class="sub-title">Termination by You</h3>
-              <p class="sec-text">You may close your account at any time via Account Settings &gt; Delete Account. Outstanding dues must be settled before account closure.</p>
-            </div>
-          </div>
-
-          <div id="tc-governing" class="section-block">
-            <h2 class="sec-title"><span class="sec-num">11</span> Governing Law &amp; Dispute Resolution</h2>
-            <p class="sec-text">These Terms are governed by the laws of the Republic of India, including the IT Act 2000, Consumer Protection Act 2019, and DPDP Act 2023.</p>
-            <ul class="legal-list">
-              <li><strong>Informal Resolution:</strong> Contact us at <strong>support&#64;prx.care</strong> first. We will respond within 10 business days.</li>
-              <li><strong>Mediation:</strong> If informal resolution fails, parties agree to attempt mediation before formal legal proceedings.</li>
-              <li><strong>Jurisdiction:</strong> Courts of Ernakulam, Kerala, India have exclusive jurisdiction.</li>
-            </ul>
-          </div>
-
-          <div id="tc-contact" class="section-block">
-            <h2 class="sec-title"><span class="sec-num">12</span> Contact Us</h2>
-            <div class="contact-card">
-              <h3>PRx Legal &amp; Compliance Team</h3>
-              <div class="contact-grid">
-                <div class="contact-item"><span class="contact-icon">📧</span><div><div class="contact-label">Legal Queries</div><div class="contact-value"><a href="mailto:admin@gho.care">admin&#64;gho.care</a></div></div></div>
-                <div class="contact-item"><span class="contact-icon">📧</span><div><div class="contact-label">General Support</div><div class="contact-value"><a href="mailto:support@prx.care">support&#64;prx.care</a></div></div></div>
-                <div class="contact-item"><span class="contact-icon">📞</span><div><div class="contact-label">Phone</div><div class="contact-value">+91 484 452 4780</div></div></div>
-                <div class="contact-item"><span class="contact-icon">📍</span><div><div class="contact-label">Jurisdiction</div><div class="contact-value">Ernakulam, Kerala, India</div></div></div>
-              </div>
-            </div>
-          </div>
-
-        </div><!-- /terms panel -->
-
-
-        <!-- ══════════════════════════════════
-             SHIPPING & DELIVERY
-        ══════════════════════════════════ -->
-        <div class="doc-panel" [class.active]="isTabActive('shipping')">
-
-          <div id="sh-overview" class="section-block">
-            <div class="doc-overview">
-              <h2>Shipping &amp; Delivery Terms</h2>
-              <p>These terms govern all pharmacy orders, medicine deliveries, and physical product shipments facilitated through PRx.care from any of our partner pharmacy network members.</p>
-              <div class="overview-cards">
-                <div class="ov-card"><div class="ov-icon">⚡</div><div class="ov-title">Express Delivery</div><div class="ov-desc">Within 2 hours where available in select areas.</div></div>
-                <div class="ov-card"><div class="ov-icon">🔒</div><div class="ov-title">Safe Handling</div><div class="ov-desc">Temperature-controlled and tamper-evident packaging.</div></div>
-                <div class="ov-card"><div class="ov-icon">📱</div><div class="ov-title">Live Tracking</div><div class="ov-desc">Real-time order status via app and SMS.</div></div>
-              </div>
-            </div>
-            <div class="eff-date-bar"><span>📅</span> Effective Date: 22 April 2026 &nbsp;|&nbsp; Applicable to: All PRx Pharmacy &amp; Product Orders</div>
-          </div>
-
-          <div id="sh-coverage" class="section-block">
-            <h2 class="sec-title"><span class="sec-num">1</span> Delivery Coverage</h2>
-            <ul class="legal-list">
-              <li>Delivery is available in <strong>select cities and pin codes</strong> across India. Availability is displayed at checkout based on your delivery address.</li>
-              <li>Coverage depends on which pharmacy partners operate in your area.</li>
-              <li>Certain specialised medicines may have more limited coverage due to storage and handling requirements.</li>
-            </ul>
-          </div>
-
-          <div id="sh-timeline" class="section-block">
-            <h2 class="sec-title"><span class="sec-num">2</span> Delivery Timeline</h2>
-            <div class="legal-table-wrap">
-              <table class="legal-table">
-                <thead><tr><th>Delivery Type</th><th>Estimated Time</th><th>Availability</th></tr></thead>
-                <tbody>
-                  <tr><td><strong>Express Delivery</strong></td><td>Within 2 hours</td><td><span class="status-chip chip-blue">Select Areas</span></td></tr>
-                  <tr><td><strong>Standard Delivery</strong></td><td>2–24 hours</td><td><span class="status-chip chip-green">Most Areas</span></td></tr>
-                  <tr><td><strong>Scheduled Delivery</strong></td><td>On selected date/time</td><td><span class="status-chip chip-blue">Selected Partners</span></td></tr>
-                  <tr><td><strong>Cold-Chain Products</strong></td><td>2–8 hours (insulated packaging)</td><td><span class="status-chip chip-blue">Limited Areas</span></td></tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="warning-box">
-              <p>⚠️ Delivery times are estimates, not guarantees. Delays may occur due to high order volume, severe weather, or traffic. We will notify you of significant delays.</p>
-            </div>
-          </div>
-
-          <div id="sh-processing" class="section-block">
-            <h2 class="sec-title"><span class="sec-num">3</span> Order Processing</h2>
-            <ul class="legal-list">
-              <li><strong>Order Confirmation:</strong> Your order is confirmed only after successful payment authorisation.</li>
-              <li><strong>Prescription Verification:</strong> Orders containing Schedule H, H1, or X medicines require a valid digital prescription. Orders that fail verification will be cancelled and fully refunded.</li>
-              <li><strong>Substitution Policy:</strong> If an ordered medicine is out of stock, you must approve any suggested generic substitute before dispatch.</li>
-              <li><strong>Order Modification:</strong> Orders can be modified or cancelled before the pharmacy confirms dispatch. Once dispatched, modifications are not possible.</li>
-            </ul>
-          </div>
-
-          <div id="sh-charges" class="section-block">
-            <h2 class="sec-title"><span class="sec-num">4</span> Shipping Charges</h2>
-            <div class="legal-table-wrap">
-              <table class="legal-table">
-                <thead><tr><th>Condition</th><th>Delivery Charge</th></tr></thead>
-                <tbody>
-                  <tr><td>Orders above ₹499</td><td><span class="status-chip chip-green">Free Delivery</span></td></tr>
-                  <tr><td>Orders below ₹499 (Standard)</td><td>₹29 – ₹49 (based on distance)</td></tr>
-                  <tr><td>Express Delivery (within 2 hrs)</td><td>₹49 – ₹99 (based on distance)</td></tr>
-                  <tr><td>Cold-chain / specialised products</td><td>Displayed at checkout</td></tr>
-                  <tr><td>Remote or low-coverage areas</td><td>Displayed at checkout</td></tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          <div id="sh-tracking" class="section-block">
-            <h2 class="sec-title"><span class="sec-num">5</span> Order Tracking</h2>
-            <ul class="legal-list">
-              <li>Track your order live in the PRx app under <strong>Bookings &gt; Pharmacy Orders</strong></li>
-              <li>Status updates are sent via SMS and push notification at each stage</li>
-              <li>A live GPS tracking link may be shared via SMS upon dispatch</li>
-              <li>If your order shows "Delivered" but was not received, contact us at <strong>support&#64;prx.care</strong> or call <strong>+91 88484 41220</strong></li>
-            </ul>
-          </div>
-
-          <div id="sh-returns" class="section-block">
-            <h2 class="sec-title"><span class="sec-num">6</span> Returns &amp; Refunds</h2>
-            <div class="sub-section">
-              <h3 class="sub-title">Non-Returnable Items</h3>
-              <ul class="legal-list">
-                <li>Prescription medicines and controlled substances</li>
-                <li>Temperature-sensitive or cold-chain products</li>
-                <li>Opened or partially used products</li>
-                <li>Products with broken seals or tampered packaging</li>
-                <li>Personal hygiene and single-use medical devices</li>
-              </ul>
-            </div>
-            <div class="sub-section">
-              <h3 class="sub-title">Eligible Refund / Replacement Scenarios</h3>
-              <ul class="legal-list legal-list--check">
-                <li>Wrong product delivered</li>
-                <li>Expired product delivered</li>
-                <li>Damaged or broken product received (photographic evidence required within 48 hours)</li>
-                <li>Order cancelled before dispatch</li>
-                <li>Prescription verification failure resulting in order cancellation</li>
-                <li>Non-delivery (product not received despite "Delivered" status)</li>
-              </ul>
-            </div>
-            <div class="sub-section">
-              <h3 class="sub-title">Refund Processing</h3>
-              <div class="legal-table-wrap">
-                <table class="legal-table">
-                  <thead><tr><th>Refund Method</th><th>Processing Time</th></tr></thead>
-                  <tbody>
-                    <tr><td>PRx Wallet Credit</td><td>Within 24 hours</td></tr>
-                    <tr><td>UPI / Net Banking</td><td>2–3 business days</td></tr>
-                    <tr><td>Debit / Credit Card</td><td>5–7 business days</td></tr>
-                    <tr><td>BNPL / EMI</td><td>As per lending partner policy</td></tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-
-          <div id="sh-failed" class="section-block">
-            <h2 class="sec-title"><span class="sec-num">7</span> Failed Deliveries</h2>
-            <p class="sec-text">An order may be marked as failed delivery if the address is incorrect, you are unavailable after two delivery attempts, or access to the delivery location is denied. Our delivery partner will make one additional attempt within the same day before returning the order to the pharmacy.</p>
-          </div>
-
-          <div id="sh-prescription" class="section-block">
-            <h2 class="sec-title"><span class="sec-num">8</span> Prescription Medicines</h2>
-            <div class="highlight-box">
-              <p><strong>Prescription medicines require a valid prescription from a registered medical practitioner.</strong> PRx.care complies fully with the Drugs and Cosmetics Act 1940 and all applicable regulations.</p>
-            </div>
-            <ul class="legal-list">
-              <li>A digital prescription uploaded via the PRx app is accepted. Physical copies may be required for Schedule X drugs.</li>
-              <li>Our licensed pharmacists review all prescriptions before dispensing. Forged or invalid prescriptions will result in order cancellation and may be reported to authorities.</li>
-              <li>PRx.care operates a <strong>Medicine Subscription</strong> service for chronic condition patients. Subscriptions are auto-renewed monthly; cancellation can be managed via the app.</li>
-            </ul>
-          </div>
-
-          <div id="sh-responsibility" class="section-block">
-            <h2 class="sec-title"><span class="sec-num">9</span> Responsibility</h2>
-            <ul class="legal-list">
-              <li><strong>PRx.care's role:</strong> We act as a technology facilitator connecting users with partner pharmacies. We do not manufacture, store, or physically handle medicines.</li>
-              <li><strong>Product quality:</strong> The quality, authenticity, and proper storage of medicines are the responsibility of the dispensing pharmacy partner.</li>
-              <li><strong>Your responsibility:</strong> Ensure the delivery address is accurate; have a responsible adult present to receive prescription medicines.</li>
-              <li><strong>Force Majeure:</strong> PRx.care is not liable for delivery failures from events beyond reasonable control.</li>
-            </ul>
-          </div>
-
-          <div id="sh-contact" class="section-block">
-            <h2 class="sec-title"><span class="sec-num">10</span> Contact Us</h2>
-            <div class="contact-card">
-              <h3>PRx Pharmacy &amp; Delivery Support</h3>
-              <div class="contact-grid">
-                <div class="contact-item"><span class="contact-icon">📧</span><div><div class="contact-label">Delivery Support</div><div class="contact-value"><a href="mailto:admin@gho.care">admin&#64;gho.care</a></div></div></div>
-                <div class="contact-item"><span class="contact-icon">📧</span><div><div class="contact-label">General Support</div><div class="contact-value"><a href="mailto:support@prx.care">support&#64;prx.care</a></div></div></div>
-                <div class="contact-item"><span class="contact-icon">📞</span><div><div class="contact-label">Pharmacy Helpline</div><div class="contact-value">+91 88484 41220</div></div></div>
-                <div class="contact-item"><span class="contact-icon">📞</span><div><div class="contact-label">Customer Care</div><div class="contact-value">+91 484 452 4780<br/>+91 999 544 1220</div></div></div>
-              </div>
-            </div>
-          </div>
-
-        </div><!-- /shipping panel -->
-
-      </div><!-- /legal-content -->
-    </div><!-- /legal-layout -->
-  </div><!-- /container -->
+  </div>
 </main>
