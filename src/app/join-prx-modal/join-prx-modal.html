@@ -10,8 +10,8 @@
         </p>
       </div>
       <button class="close-btn" (click)="onCancel()" aria-label="Close">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
-          fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <line x1="18" y1="6" x2="6" y2="18"></line>
           <line x1="6" y1="6" x2="18" y2="18"></line>
         </svg>
@@ -26,15 +26,8 @@
       <!-- Facility Name -->
       <div class="form-group">
         <label class="form-label" for="facilityName">Facility Name <span class="required">*</span></label>
-        <input
-          id="facilityName"
-          type="text"
-          class="form-input"
-          [class.invalid]="isFieldInvalid(formData.facilityName)"
-          placeholder="Enter facility name"
-          [(ngModel)]="formData.facilityName"
-          name="facilityName"
-        />
+        <input id="facilityName" type="text" class="form-input" [class.invalid]="isFieldInvalid(formData.facilityName)"
+          placeholder="Enter facility name" [(ngModel)]="formData.facilityName" name="facilityName" />
         <span class="error-msg" *ngIf="isFieldInvalid(formData.facilityName)">Facility name is required.</span>
       </div>
 
@@ -42,18 +35,13 @@
       <div class="form-group">
         <label class="form-label" for="type">Type <span class="required">*</span></label>
         <div class="select-wrapper" [class.invalid]="isSelectInvalid(formData.type)">
-          <select
-            id="type"
-            class="form-select"
-            [(ngModel)]="formData.type"
-            name="type"
-          >
+          <select id="type" class="form-select" [(ngModel)]="formData.type" name="type">
             <option value="" disabled selected>Select type</option>
             <option *ngFor="let t of facilityTypes" [value]="t">{{ t }}</option>
           </select>
           <span class="select-arrow">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
-              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <polyline points="6 9 12 15 18 9"></polyline>
             </svg>
           </span>
@@ -65,33 +53,29 @@
       <div class="form-group">
         <label class="form-label">Phone <span class="required">*</span></label>
         <div class="phone-row">
-          <div class="select-wrapper phone-code-wrapper" [class.invalid]="isSelectInvalid(formData.phoneCode)">
-            <select
-              class="form-select phone-code-select"
-              [(ngModel)]="formData.phoneCode"
-              name="phoneCode"
-            >
-              <option value="" disabled selected>Select</option>
-              <option *ngFor="let p of phoneCodes" [value]="p.code">{{ p.flag }} {{ p.code }}</option>
+          <div class="select-wrapper phone-code-wrapper" [class.invalid]="isSelectInvalid(formData.CountryID)">
+            <select class="form-select phone-code-select" [(ngModel)]="formData.CountryID" name="CountryID">
+              <option [ngValue]="null" disabled>Select</option>
+
+              <option *ngFor="let p of countryList" [ngValue]="p.CountryID">
+                {{
+                formData.CountryID === p.CountryID
+                ? '+' + p.CountryCode
+                : (p.CountryName + ' (+' + p.CountryCode + ')')
+                }}
+              </option>
             </select>
             <span class="select-arrow">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
-                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <polyline points="6 9 12 15 18 9"></polyline>
               </svg>
             </span>
           </div>
-          <input
-            type="tel"
-            class="form-input phone-number-input"
-            [class.invalid]="isFieldInvalid(formData.phone)"
-            placeholder="Enter phone number"
-            [(ngModel)]="formData.phone"
-            name="phone"
-          />
+          <input type="tel" [attr.maxlength]="selectedCountry?.MaxLength || 15" class="form-input phone-number-input" [class.invalid]="isFieldInvalid(formData.phone)"
+            placeholder="Enter phone number" [(ngModel)]="formData.phone" name="phone" />
         </div>
-        <span class="error-msg"
-          *ngIf="isSelectInvalid(formData.phoneCode) || isFieldInvalid(formData.phone)">
+        <span class="error-msg" *ngIf="isSelectInvalid(formData.CountryID) || isFieldInvalid(formData.phone)">
           Phone number and code are required.
         </span>
       </div>
@@ -99,31 +83,19 @@
       <!-- Email -->
       <div class="form-group">
         <label class="form-label" for="email">Email <span class="required">*</span></label>
-        <input
-          id="email"
-          type="email"
-          class="form-input"
-          [class.invalid]="isFieldInvalid(formData.email)"
-          placeholder="Enter email"
-          [(ngModel)]="formData.email"
-          name="email"
-        />
+        <input id="email" type="email" class="form-input" [class.invalid]="isFieldInvalid(formData.email)"
+          placeholder="Enter email" [(ngModel)]="formData.email" name="email" />
         <span class="error-msg" *ngIf="isFieldInvalid(formData.email)">Email is required.</span>
       </div>
 
       <!-- Contact Person Name -->
       <div class="form-group">
         <label class="form-label" for="contactName">Contact Person Name <span class="required">*</span></label>
-        <input
-          id="contactName"
-          type="text"
-          class="form-input"
-          [class.invalid]="isFieldInvalid(formData.contactPersonName)"
-          placeholder="Enter name"
-          [(ngModel)]="formData.contactPersonName"
-          name="contactPersonName"
-        />
-        <span class="error-msg" *ngIf="isFieldInvalid(formData.contactPersonName)">Contact person name is required.</span>
+        <input id="contactName" type="text" class="form-input"
+          [class.invalid]="isFieldInvalid(formData.contactPersonName)" placeholder="Enter name"
+          [(ngModel)]="formData.contactPersonName" name="contactPersonName" />
+        <span class="error-msg" *ngIf="isFieldInvalid(formData.contactPersonName)">Contact person name is
+          required.</span>
       </div>
 
       <!-- Buttons -->

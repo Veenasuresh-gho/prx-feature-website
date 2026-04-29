@@ -1,11 +1,14 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { GHOService } from '../services/ghoServices';
+import { tags } from '../model/ghomodel';
+import { ToastService } from '../services/toastService';
 
 export interface JoinFormData {
   facilityName: string;
   type: string;
-  phoneCode: string;
+  CountryID: number | null;
   phone: string;
   email: string;
   contactPersonName: string;
@@ -13,55 +16,61 @@ export interface JoinFormData {
 
 @Component({
   selector: 'app-join-prx-modal',
-  standalone: true, // ✅ REQUIRED
+  standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './join-prx-modal.html',
-  styleUrls: ['./join-prx-modal.css'], // ✅ FIXED
+  styleUrls: ['./join-prx-modal.css'],
 })
-export class JoinPrxModal {
+export class JoinPrxModal implements OnInit {
 
   @Output() submitted = new EventEmitter<JoinFormData>();
   @Output() cancelled = new EventEmitter<void>();
 
-  facilityTypes = [
-    'Doctor / General Practitioner',
-    'Clinic',
-    'Laboratory',
-    'Pharmacy',
-    'Specialist Hospital',
-    'Diagnostic Centre',
-    'Dental Clinic',
-    'Eye Clinic',
-    'Physiotherapy Centre',
-    'Mental Health Centre',
-  ];
+  tv: tags[] = [];
+  countryList: any;
+  srv = inject(GHOService);
+  toast = inject(ToastService);
 
-  phoneCodes = [
-    { code: '+1', flag: '🇺🇸', label: 'US' },
-    { code: '+44', flag: '🇬🇧', label: 'UK' },
-    { code: '+91', flag: '🇮🇳', label: 'IN' },
-    { code: '+234', flag: '🇳🇬', label: 'NG' },
-    { code: '+254', flag: '🇰🇪', label: 'KE' },
-    { code: '+233', flag: '🇬🇭', label: 'GH' },
-    { code: '+27', flag: '🇿🇦', label: 'ZA' },
-    { code: '+971', flag: '🇦🇪', label: 'AE' },
+  facilityTypes = [
+    'Hospital',
+    'Clinic',
+    'Pharmacy',
+    'Laboratory',
+    'Dental Clinic',
+    'Healthcare Provider',
+    'Self Practitioner Doctor',
   ];
 
   formData: JoinFormData = {
     facilityName: '',
     type: '',
-    phoneCode: '',
+    CountryID: null,
     phone: '',
     email: '',
     contactPersonName: '',
   };
 
+  get selectedCountry() {
+    return this.countryList?.find(
+      (c: any) => c.CountryID == this.formData.CountryID
+    );
+  }
+
   submitted_flag = false;
 
-  get selectedPhoneLabel(): string {
-    if (!this.formData.phoneCode) return 'Select';
-    const match = this.phoneCodes.find(p => p.code === this.formData.phoneCode);
-    return match ? `${match.flag} ${match.code}` : 'Select';
+  ngOnInit(): void {
+    this.getCountry();
+  }
+
+  getCountry() {
+    this.tv = [
+      { T: 'c10', V: '99' }
+    ];
+    this.srv.getdata('lists', this.tv).subscribe((r) => {
+      if (r.Status === 1 && r.Data?.length > 0) {
+        this.countryList = r.Data[0];
+      }
+    });
   }
 
   onSubmit(): void {
@@ -70,8 +79,35 @@ export class JoinPrxModal {
     if (this.isFormValid()) {
       this.submitted.emit({ ...this.formData });
 
-      this.resetForm();
-      this.cancelled.emit();
+      const payload = {
+        TenantName: this.formData?.facilityName,
+        Email: this.formData?.email,
+        Phone: this.formData?.phone,
+        CountryID: this.formData?.CountryID,
+        TenantType: this.formData?.type,
+        ContactPersonName: this.formData?.contactPersonName
+      }
+
+      this.tv = [
+        { T: 'c1', V: JSON.stringify(payload) },
+        { T: 'c10', V: '14' }
+      ];
+      this.srv.getdata('Tenants', this.tv).subscribe((r) => {
+        if (r.Status === 0) {
+          this.toast.showError(r.Info);
+        }
+
+        if (r.Status === 1) {
+          this.toast.showSuccess(r.Data[0][0].Message);
+
+          setTimeout(() => {
+            this.resetForm();
+            this.cancelled.emit();
+          }, 500); 
+        }
+      });
+
+
     }
   }
 
@@ -83,7 +119,7 @@ export class JoinPrxModal {
     return (
       this.formData.facilityName.trim() !== '' &&
       this.formData.type !== '' &&
-      this.formData.phoneCode !== '' &&
+      this.formData.CountryID !== null &&
       this.formData.phone.trim() !== '' &&
       this.formData.email.trim() !== '' &&
       this.formData.contactPersonName.trim() !== ''
@@ -94,16 +130,15 @@ export class JoinPrxModal {
     return this.submitted_flag && value.trim() === '';
   }
 
-  isSelectInvalid(value: string): boolean {
-    return this.submitted_flag && value === '';
+  isSelectInvalid(value: any): boolean {
+    return this.submitted_flag && (value === null || value === '');
   }
 
-  // ✅ Bonus: reset form
   resetForm(): void {
     this.formData = {
       facilityName: '',
       type: '',
-      phoneCode: '',
+      CountryID: null,
       phone: '',
       email: '',
       contactPersonName: '',
