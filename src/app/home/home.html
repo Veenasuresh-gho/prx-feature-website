@@ -9,15 +9,17 @@
             <span class="banner__sub">Onboard your hospital, clinic, lab, or practice and unlock new opportunities
                 to serve patients better</span>
         </div>
-        <a href="/request-demo" class="banner__btn">
+        <button href="/request-demo" (click)="openRequestDemoModal()" class="banner__btn">
             <svg class="banner__btn-icon" viewBox="0 0 24 24" fill="none">
                 <path
                     d="M15 10l4.553-2.277A1 1 0 0 1 21 8.618v6.764a1 1 0 0 1-1.447.894L15 14M3 8a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8z"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
             </svg>
             Request PRx Demo
-        </a>
+        </button>
     </div>
+
+
 </div>
 
 <!-- ═══ HERO ═══ -->
@@ -47,6 +49,8 @@
 
             <app-join-prx-modal *ngIf="isJoinModalOpen" (cancelled)="closeJoinModal()">
             </app-join-prx-modal>
+            <app-request-demo-modal *ngIf="isRequestDemoModalOpen" (cancelled)="closeRequestDemoModal()">
+            </app-request-demo-modal>
 
             <div class="hero__stats">
                 <!-- 10k+ Patients -->
