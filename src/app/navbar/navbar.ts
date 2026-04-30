@@ -31,9 +31,8 @@ export class Navbar implements OnInit {
 
   async getLocation() {
     try {
-       this.location = await this.geo.getFullLocation();
-       console.log(this.location)
-      sessionStorage.setItem('userLocation', JSON.stringify(location));
+      this.location = await this.geo.getFullLocation();
+      sessionStorage.setItem('userLocation', JSON.stringify(this.location));
     } catch (err) {
       console.error(err);
     }

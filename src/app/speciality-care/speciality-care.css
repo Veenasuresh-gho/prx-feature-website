@@ -76,6 +76,7 @@
  .srch-card {
      background: #fff;
      border-radius: 14px;
+     border: var(--primary-color) 1px solid;
      box-shadow: 0 4px 28px rgba(0, 0, 0, .10);
      padding: 22px 24px
  }

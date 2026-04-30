@@ -1,12 +1,44 @@
-import { Component, AfterViewInit, ViewEncapsulation } from '@angular/core';
+import { Component, AfterViewInit, ViewEncapsulation, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'speciality-care',
   templateUrl: './speciality-care.html',
+  imports: [CommonModule, FormsModule],
   styleUrls: ['./speciality-care.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class SpecialityCare implements AfterViewInit {
+export class SpecialityCare implements AfterViewInit, OnInit {
+
+  location: any;
+  city: String = '';
+  selectedLocation: any = {
+    city: '',
+    state: '',
+    country: '',
+    latitude: null,
+    longitude: null
+  };
+
+  ngOnInit(): void {
+    const stored = sessionStorage.getItem('userLocation');
+
+    if (stored) {
+      const parsed = JSON.parse(stored);
+
+      this.selectedLocation = {
+        city: parsed.city || '',
+        state: parsed.state || '',
+        country: parsed.country || '',
+        latitude: parsed.latitude || null,
+        longitude: parsed.longitude || null
+      };
+
+    } else {
+      this.selectedLocation.city = 'Select location';
+    }
+  }
 
   specialties = [
     { title: 'Dermatology (Skin Doctor)', desc: 'Treatment for skin, hair, and nail problems', tags: ['Skin issues', 'Hair fall', 'Acne'] },

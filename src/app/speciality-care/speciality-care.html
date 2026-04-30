@@ -30,7 +30,8 @@
             <div class="sf-div"></div>
             <div class="sf">
                 <label for="loc">Location</label>
-                <input id="loc" type="text" value="Edappally, Ernakulam" autocomplete="off" />
+                <input id="loc" type="text" [(ngModel)]="selectedLocation.city" placeholder="Select location"
+                    autocomplete="off" />
             </div>
             <button class="srch-btn" onclick="doSearch()">
                 <svg viewBox="0 0 24 24" fill="none">

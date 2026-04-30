@@ -17,7 +17,7 @@ export interface FullLocation {
 })
 export class GeolocationService {
 
-  private API_KEY = 'AIzaSyBVJlf7uveW3SMtwbytBoKhJluwxserCzA'; 
+  private API_KEY = 'AIzaSyBVJlf7uveW3SMtwbytBoKhJluwxserCzA';
 
   constructor(private http: HttpClient) {}
 
