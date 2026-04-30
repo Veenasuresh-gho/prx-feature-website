@@ -1,69 +1,89 @@
 <header class="navbar">
     <div class="navbar__container">
 
-        <a href="/" class="navbar__logo" aria-label="PRx Home">
+        <a href="/" class="navbar__logo">
             <img src="/PRx-Logo.png" />
         </a>
 
         <!-- Desktop Nav -->
         <nav class="navbar__nav">
+
+            <!-- Patients -->
             <div class="navbar__nav-item">
-                <button class="navbar__nav-link">
+                <button class="navbar__nav-link" (click)="toggleDropdown('patients', $event)">
                     For Patients
-                    <svg class="chevron" viewBox="0 0 24 24" fill="none">
-                        <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round" />
+                    <svg class="chevron" [class.rotate]="activeDropdown === 'patients'" viewBox="0 0 24 24">
+                        <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" />
                     </svg>
                 </button>
-                <div class="navbar__dropdown">
-                    <a href="/find-doctor">Find a Doctor</a>
-                    <a href="/book-appointment">Book Appointment</a>
-                    <a href="/medical-records">Medical Records</a>
-                    <a href="/home-care">Home Care</a>
+
+                <div class="navbar__dropdown" [class.open]="activeDropdown === 'patients'">
+                    <a href="https://portal.prx.care/en/auth/sign-in">Find a Doctor</a>
+                    <a href="https://portal.prx.care/en/auth/sign-in">Book Appointment</a>
+                    <a href="https://portal.prx.care/en/auth/sign-in">Medical Records</a>
+                    <a href="https://portal.prx.care/en/auth/sign-in">Home Care</a>
                 </div>
             </div>
 
+            <!-- Providers -->
             <div class="navbar__nav-item">
-                <button class="navbar__nav-link">
+                <button class="navbar__nav-link" (click)="toggleDropdown('providers', $event)">
                     For Providers
-                    <svg class="chevron" viewBox="0 0 24 24" fill="none">
-                        <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round" />
+                    <svg class="chevron" [class.rotate]="activeDropdown === 'providers'" viewBox="0 0 24 24">
+                        <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" />
                     </svg>
                 </button>
-                <div class="navbar__dropdown">
-                    <a href="/join-network">Join Network</a>
-                    <a href="/hospital-login">Hospital Login</a>
-                    <a href="/lab-login">Lab Login</a>
-                    <a href="/request-demo">Request Demo</a>
+
+                <div class="navbar__dropdown" [class.open]="activeDropdown === 'providers'">
+
+                    <a class="dropdown-btn" (click)="openJoinModal($event)">
+                        Join Network
+                    </a>
+
+                    <a href="https://hospital-dashboard.prx.care/">Hospital Login</a>
+                    <a href="https://lab.prx.care/auth/login">Lab Login</a>
+                    <a class="dropdown-btn" (click)="openRequestDemoModal($event)">
+                        Request Demo
+                    </a>
                 </div>
+
+                <!-- Modal -->
+                <app-join-prx-modal *ngIf="isJoinModalOpen" (cancelled)="closeJoinModal()">
+                </app-join-prx-modal>
+
+                <app-request-demo-modal *ngIf="isRequestDemoModalOpen" (cancelled)="closeRequestDemoModal()">
+                </app-request-demo-modal>
+
+
             </div>
 
             <a href="/abdm" class="navbar__nav-link">ABDM</a>
         </nav>
 
-        <!-- Desktop CTAs -->
+        <!-- Actions -->
         <div class="navbar__actions">
             <a href="/download" class="nb-btn nb-btn--download">Download App</a>
-            <a href="https://portal.prx.care/en/auth/sign-in" target="_blank" rel="noopener noreferrer" class="nb-btn nb-btn--cta">
+            <a href="https://portal.prx.care/en/auth/sign-in" target="_blank" class="nb-btn nb-btn--cta">
                 Get Started
             </a>
         </div>
 
         <!-- Hamburger -->
-        <button class="navbar__hamburger" (click)="toggleMobile()" [class.open]="isMenuOpen"
-            [attr.aria-expanded]="isMenuOpen"> <span></span>
+        <button class="navbar__hamburger" (click)="toggleMobile($event)" [class.open]="isMenuOpen">
+            <span></span>
             <span></span>
             <span></span>
         </button>
     </div>
 
-    <!-- Mobile Drawer -->
-    <div class="navbar__mobile" id="mobileMenu">
+    <!-- Mobile -->
+    <div class="navbar__mobile" [class.open]="isMenuOpen">
         <a href="/for-patients">For Patients</a>
         <a href="/for-providers">For Providers</a>
         <a href="/abdm">ABDM</a>
+
         <div class="mobile-divider"></div>
+
         <a href="/download" class="mobile-btn mobile-btn--dl">Download App</a>
         <a href="/get-started" class="mobile-btn mobile-btn--cta">Get Started</a>
     </div>

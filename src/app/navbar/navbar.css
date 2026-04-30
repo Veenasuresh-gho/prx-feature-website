@@ -89,10 +89,15 @@
         display: none;
     }
 
-    .navbar__nav-item:hover .navbar__dropdown {
+    .navbar__dropdown.open {
+    display: block;
+    animation: dropFade .15s ease;
+}
+
+    /* .navbar__nav-item:hover .navbar__dropdown {
         display: block;
         animation: dropFade .15s ease;
-    }
+    } */
 
     @keyframes dropFade {
         from {
@@ -164,6 +169,9 @@
         background: #15803d;
     }
 
+    .dropdown-btn{
+        cursor: pointer;
+    }
     /* Hamburger */
     .navbar__hamburger {
         display: none;
