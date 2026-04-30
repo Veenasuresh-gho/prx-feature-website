@@ -57,7 +57,9 @@
 
             </div>
 
-            <a href="/abdm" class="navbar__nav-link">ABDM</a>
+            <a *ngIf="location?.country === 'India'" href="/abdm" class="navbar__nav-link">
+                ABDM
+            </a>
         </nav>
 
         <!-- Actions -->
