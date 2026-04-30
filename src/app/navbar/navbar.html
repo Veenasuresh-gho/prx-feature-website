@@ -57,14 +57,15 @@
 
             </div>
 
-            <a *ngIf="location?.country === 'India'" href="/abdm" class="navbar__nav-link">
+            <a *ngIf="!location || location?.country === 'India'"
+                href="https://portal.prx.care/en/ayushman-bharath-digital-mission" class="navbar__nav-link">
                 ABDM
             </a>
         </nav>
 
         <!-- Actions -->
         <div class="navbar__actions">
-            <a href="/download" class="nb-btn nb-btn--download">Download App</a>
+            <!-- <a href="/download" class="nb-btn nb-btn--download">Download App</a> -->
             <a href="https://portal.prx.care/en/auth/sign-in" target="_blank" class="nb-btn nb-btn--cta">
                 Get Started
             </a>
