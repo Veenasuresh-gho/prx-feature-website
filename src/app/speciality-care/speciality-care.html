@@ -17,42 +17,53 @@
   <div class="srch-card">
     <div class="srch-form">
 
-      <div class="sf">
+      <div class="sf" style="position: relative;">
         <label for="cond">Search</label>
-        <input
-          id="cond"
-          type="text"
-          [(ngModel)]="searchText"
-          placeholder="Condition / procedure / treatment"
-          autocomplete="off"
-        />
+
+        <input id="cond" type="text" [(ngModel)]="searchText" (focus)="onConditionFocus()" (input)="onConditionInput()"
+          placeholder="Condition / procedure / treatment" autocomplete="off" />
+
+        <ul class="suggestions" *ngIf="showSuggestions && filteredConditions.length">
+          <li *ngFor="let item of filteredConditions" (click)="selectCondition(item)">
+
+            <div class="title">{{ item.SpecialtyName }}</div>
+
+            <div class="sub" *ngIf="item.BodyFunction">
+              {{ item.BodyFunction }}
+            </div>
+
+            <div class="sub" *ngIf="item.BodyParts">
+              {{ item.BodyParts }}
+            </div>
+            <div class="sub" *ngIf="item.BodyParts">
+              {{ item.Condition }}
+            </div>
+
+          </li>
+        </ul>
       </div>
 
       <div class="sf-div"></div>
 
-      <div class="sf">
+      <div class="sf" style="position: relative;">
         <label for="fac">Facility</label>
-        <input
-          id="fac"
-          type="text"
-          [(ngModel)]="facility"
-          placeholder="Doctor's name / hospital / clinics"
-          autocomplete="off"
-        />
-      </div>
 
+        <input id="fac" type="text" [(ngModel)]="facility" (focus)="onDoctorFocus()" (input)="onDoctorInput()"
+          placeholder="Doctor's name / hospital / clinics" />
+
+        <ul class="suggestions" *ngIf="showDoctorSuggestions && filteredDoctors.length">
+          <li *ngFor="let doc of filteredDoctors" (click)="selectDoctor(doc)">
+            <div class="title">{{ doc.Name }}</div>
+            <div class="sub">{{ doc.Entity }}</div>
+          </li>
+        </ul>
+      </div>
       <div class="sf-div"></div>
 
       <div class="sf">
         <label for="loc">Location</label>
-        <input
-          #locationInput
-          id="loc"
-          type="text"
-          [(ngModel)]="selectedLocation.city"
-          placeholder="Select location"
-          autocomplete="off"
-        />
+        <input #locationInput id="loc" type="text" [(ngModel)]="selectedLocation.city" placeholder="Select location"
+          autocomplete="off" />
       </div>
 
       <button class="srch-btn" (click)="doSearch()">

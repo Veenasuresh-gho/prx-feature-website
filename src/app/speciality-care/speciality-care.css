@@ -63,7 +63,41 @@
 
 
 
+.suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  max-height: 220px;
+  overflow-y: auto;
+  background: #fff;
+  border: 1px solid #ddd;
+  z-index: 999;
+  list-style: none;
+  margin: 4px 0 0;
+  padding: 0;
+  border-radius: 6px;
+}
 
+.suggestions li {
+  padding: 10px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.suggestions li:hover {
+  background: #f5f5f5;
+}
+.title {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.sub {
+  font-size: 12px;
+  color: #666;
+  margin-top: 2px;
+}
  /* ═══════════════════════ SEARCH CARD ═══════════════════════ */
  .srch-wrap {
      max-width: 1100px;

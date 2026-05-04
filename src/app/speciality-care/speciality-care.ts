@@ -4,10 +4,15 @@ import {
   ViewEncapsulation,
   OnInit,
   ViewChild,
-  ElementRef
+  ElementRef,
+  inject,
+  HostListener
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { tags } from '../model/ghomodel';
+import { GHOService } from '../services/ghoServices';
+
 
 declare var google: any;
 
@@ -20,7 +25,13 @@ declare var google: any;
   encapsulation: ViewEncapsulation.None
 })
 export class SpecialityCare implements AfterViewInit, OnInit {
-
+  @HostListener('document:click', ['$event'])
+  handleOutsideClick(event: any) {
+    if (!event.target.closest('.sf')) {
+      this.showSuggestions = false;
+      this.showDoctorSuggestions = false;
+    }
+  }
   @ViewChild('locationInput') locationInput!: ElementRef;
   searchText: string = '';
   facility: string = '';
@@ -32,6 +43,130 @@ export class SpecialityCare implements AfterViewInit, OnInit {
     longitude: null
   };
 
+  tv: tags[] = [];
+  conditionList: any[] = [];
+  doctorList: any[] = [];
+  filteredDoctors: any[] = [];
+  selectedDoctor: any = null;
+  filteredConditions: any[] = [];
+  showDoctorSuggestions = false;
+  doctorSearchTimeout: any;
+  showSuggestions = false;
+  isLoadingConditions = false;
+  selectedCondition: any = null;
+  srv = inject(GHOService);
+
+  getConditionList() {
+    this.isLoadingConditions = true;
+
+    this.tv = [{ T: 'c10', V: '10' }];
+
+    this.srv.getdata('lists', this.tv).subscribe({
+      next: (r) => {
+        this.isLoadingConditions = false;
+
+        if (r.Status === 1 && r.Data?.length > 0) {
+          const rawList = r.Data[0];
+
+          this.conditionList = rawList;
+          this.filteredConditions = [...this.conditionList];
+        }
+      },
+      error: () => {
+        this.isLoadingConditions = false;
+      }
+    });
+  }
+
+  getDoctorList() {
+    if (!this.selectedLocation?.city) return;
+
+    this.tv = [
+      { T: 'dk1', V: this.facility },
+      { T: 'dk2', V: this.selectedLocation?.city },
+      { T: 'c10', V: '14' }
+    ];
+
+    this.srv.getdata('lists', this.tv).subscribe({
+      next: (r) => {
+        if (r.Status === 1 && r.Data?.length > 0) {
+          this.doctorList = r.Data[0];
+          this.filteredDoctors = this.doctorList;
+          this.showDoctorSuggestions = true;
+        } else {
+          this.filteredDoctors = [];
+          this.showDoctorSuggestions = false;
+        }
+      },
+      error: () => {
+        this.filteredDoctors = [];
+        this.showDoctorSuggestions = false;
+      }
+    });
+  }
+
+  onDoctorFocus(): void {
+    if (!this.doctorList.length) {
+      this.getDoctorList();
+    }
+
+    this.filteredDoctors = [...this.doctorList];
+    this.showDoctorSuggestions = true;
+  }
+
+  onDoctorInput(): void {
+    const value = this.facility?.trim();
+
+    if (!value) {
+      this.filteredDoctors = [];
+      this.showDoctorSuggestions = false;
+      return;
+    }
+
+    clearTimeout(this.doctorSearchTimeout);
+
+    this.doctorSearchTimeout = setTimeout(() => {
+      this.getDoctorList();
+    }, 400);
+  }
+
+
+  selectDoctor(doc: any): void {
+    this.facility = doc.Name;
+    this.selectedDoctor = doc;
+    this.showDoctorSuggestions = false;
+  }
+
+
+  onConditionFocus(): void {
+    if (!this.conditionList.length && !this.isLoadingConditions) {
+      this.getConditionList();
+    }
+
+
+    this.filteredConditions = [...this.conditionList];
+    this.showSuggestions = true;
+  }
+
+  onConditionInput(): void {
+    const value = this.searchText?.toLowerCase() || '';
+
+    this.filteredConditions = this.conditionList.filter((item: any) =>
+      item.SpecialtyName?.toLowerCase().includes(value) ||
+      item.BodyParts?.toLowerCase().includes(value) ||
+      item.Condition?.toLowerCase().includes(value) ||
+      item.BodyFunction?.toLowerCase().includes(value)
+    );
+
+    this.showSuggestions = true;
+  }
+
+  selectCondition(item: any): void {
+    console.log(item)
+    this.searchText = item.SpecialtyName;
+    this.selectedCondition = item;
+    this.showSuggestions = false;
+  }
 
   specialties = [
     { title: 'Dermatology (Skin Doctor)', desc: 'Treatment for skin, hair, and nail problems', tags: ['Skin issues', 'Hair fall', 'Acne'] },
@@ -80,42 +215,67 @@ export class SpecialityCare implements AfterViewInit, OnInit {
     }
   }
 
-initAutocomplete(): void {
-  const autocomplete = new google.maps.places.Autocomplete(
-    this.locationInput.nativeElement,
-    {
-      types: [] 
-    }
-  );
+  initAutocomplete(): void {
+    const autocomplete = new google.maps.places.Autocomplete(
+      this.locationInput.nativeElement,
+      {
+        types: []
+      }
+    );
 
-  autocomplete.addListener('place_changed', () => {
-    const place = autocomplete.getPlace();
+    autocomplete.addListener('place_changed', () => {
+      const place = autocomplete.getPlace();
+      if (!place.geometry) return;
 
-    if (!place.geometry) return;
+      let city = '';
+      let sublocality = '';
+      let district = '';
+      let state = '';
+      let country = '';
 
-    let city = '';
-    let state = '';
-    let country = '';
+      place.address_components?.forEach((comp: any) => {
 
-    place.address_components?.forEach((comp: any) => {
-      if (comp.types.includes('locality')) city = comp.long_name;
-      if (comp.types.includes('administrative_area_level_1')) state = comp.long_name;
-      if (comp.types.includes('country')) country = comp.long_name;
+        if (comp.types.includes('sublocality') || comp.types.includes('sublocality_level_1')) {
+          sublocality = comp.long_name;
+        }
+
+        if (comp.types.includes('locality')) {
+          city = comp.long_name;
+        }
+
+        if (comp.types.includes('administrative_area_level_3')) {
+
+          district = comp.long_name;
+        }
+
+        if (comp.types.includes('administrative_area_level_1')) {
+          state = comp.long_name;
+        }
+
+        if (comp.types.includes('country')) {
+          country = comp.long_name;
+        }
+      });
+
+      if (!city) {
+        city = district || place.name;
+      }
+      const finalCity = sublocality || city || district || place.name;
+
+      this.selectedLocation = {
+        city: finalCity,
+        district,
+        state,
+        country,
+        latitude: place.geometry.location.lat(),
+        longitude: place.geometry.location.lng()
+      };
+
+      console.log('Selected Location:', this.selectedLocation);
+
+      sessionStorage.setItem('userLocation', JSON.stringify(this.selectedLocation));
     });
-
-    if (!city) city = place.name;
-
-    this.selectedLocation = {
-      city,
-      state,
-      country,
-      latitude: place.geometry.location.lat(),
-      longitude: place.geometry.location.lng()
-    };
-
-    sessionStorage.setItem('userLocation', JSON.stringify(this.selectedLocation));
-  });
-}
+  }
 
   cardHTML(s: any): string {
     const tags = s.tags.map((t: string, i: number) =>
@@ -123,13 +283,13 @@ initAutocomplete(): void {
     ).join('');
 
     return `<article class="card">
-      <div class="card__ico">
-        <img src="${this.ICON}" alt="icon">
-      </div>
-      <h3 class="card__title">${s.title}</h3>
-      <p class="card__desc">${s.desc}</p>
-      <div class="card__tags">${tags}</div>
-    </article>`;
+        <div class="card__ico">
+          <img src="${this.ICON}" alt="icon">
+        </div>
+        <h3 class="card__title">${s.title}</h3>
+        <p class="card__desc">${s.desc}</p>
+        <div class="card__tags">${tags}</div>
+      </article>`;
   }
 
   renderDesktop(): void {
@@ -161,6 +321,8 @@ initAutocomplete(): void {
     }
   }
 
+
+
   renderMobile(): void {
     const mob = document.getElementById('mobileGrid');
     if (!mob) return;
@@ -184,8 +346,50 @@ initAutocomplete(): void {
       this.renderDesktop();
     }
   }
-
   doSearch(): void {
-    console.log('Selected Location:', this.selectedLocation);
+
+    if (this.selectedCondition && !this.facility) {
+
+      const params = new URLSearchParams({
+        tenantId: this.selectedCondition.SpecialtyID,
+        type: 'Speciality',
+        name: this.selectedCondition.SpecialtyName
+      });
+
+      window.location.href =
+        `https://portal.prx.care/en/schedule-appointment?${params.toString()}`;
+      return;
+    }
+
+    if (this.selectedDoctor && this.selectedDoctor.Entity === 'Doctor' && !this.searchText) {
+
+
+      window.location.href =
+        `https://portal.prx.care/en/schedule-appointment/${this.selectedDoctor.Slug}`;
+      return;
+    }
+
+    if (this.selectedDoctor && this.selectedDoctor.Entity === 'Hospital' && !this.searchText) {
+
+      const params = new URLSearchParams({
+        tenantId: this.selectedDoctor.ID,
+        tenantIdAlt: this.selectedDoctor.ID
+      });
+
+      window.location.href =
+        `https://portal.prx.care/en/hospital?${params.toString()}`;
+      return;
+    }
+
+    const params = new URLSearchParams({
+      condition: this.searchText || '',
+      doctor: this.facility || '',
+      city: this.selectedLocation?.city || '',
+      lat: this.selectedLocation?.latitude || '',
+      lng: this.selectedLocation?.longitude || ''
+    });
+
+    window.location.href =
+      `https://portal.prx.care/en/schedule-appointment/search?${params.toString()}`;
   }
 }
