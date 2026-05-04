@@ -115,6 +115,11 @@
   font-style: italic;
 }
 
+.srch-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
  /* ═══════════════════════ SEARCH CARD ═══════════════════════ */
  .srch-wrap {
      max-width: 1100px;

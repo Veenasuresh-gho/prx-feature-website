@@ -79,6 +79,10 @@ export class SpecialityCare implements AfterViewInit, OnInit {
     });
   }
 
+  get isSearchEnabled(): boolean {
+    return !!(this.selectedCondition || this.selectedDoctor);
+  }
+
   getDoctorList() {
     if (!this.selectedLocation?.city) return;
     this.isLoadingDoctors = true;
@@ -138,6 +142,7 @@ export class SpecialityCare implements AfterViewInit, OnInit {
     this.facility = doc.Name;
     this.selectedDoctor = doc;
     this.showDoctorSuggestions = false;
+
   }
 
 
@@ -169,6 +174,7 @@ export class SpecialityCare implements AfterViewInit, OnInit {
     this.searchText = item.SpecialtyName;
     this.selectedCondition = item;
     this.showSuggestions = false;
+
   }
 
   specialties = [
@@ -203,10 +209,17 @@ export class SpecialityCare implements AfterViewInit, OnInit {
     const stored = sessionStorage.getItem('userLocation');
 
     if (stored) {
-      this.selectedLocation = JSON.parse(stored);
-    } else {
-      this.selectedLocation.city = 'Select location';
+      try {
+        const parsed = JSON.parse(stored);
+
+        if (parsed && parsed.city) {
+          this.selectedLocation = parsed;
+        }
+      } catch (e) {
+        console.error('Invalid stored location');
+      }
     }
+
   }
 
   ngAfterViewInit(): void {
@@ -286,13 +299,13 @@ export class SpecialityCare implements AfterViewInit, OnInit {
     ).join('');
 
     return `<article class="card">
-        <div class="card__ico">
-          <img src="${this.ICON}" alt="icon">
-        </div>
-        <h3 class="card__title">${s.title}</h3>
-        <p class="card__desc">${s.desc}</p>
-        <div class="card__tags">${tags}</div>
-      </article>`;
+          <div class="card__ico">
+            <img src="${this.ICON}" alt="icon">
+          </div>
+          <h3 class="card__title">${s.title}</h3>
+          <p class="card__desc">${s.desc}</p>
+          <div class="card__tags">${tags}</div>
+        </article>`;
   }
 
   renderDesktop(): void {
@@ -351,8 +364,8 @@ export class SpecialityCare implements AfterViewInit, OnInit {
   }
   doSearch(): void {
 
-    if (this.selectedCondition && !this.facility) {
-
+    // ✅ 1. If condition selected → go to speciality page
+    if (this.selectedCondition) {
       const params = new URLSearchParams({
         tenantId: this.selectedCondition.SpecialtyID,
         type: 'Speciality',
@@ -364,35 +377,30 @@ export class SpecialityCare implements AfterViewInit, OnInit {
       return;
     }
 
-    if (this.selectedDoctor && this.selectedDoctor.Entity === 'Doctor' && !this.searchText) {
+    // ✅ 2. If doctor selected
+    if (this.selectedDoctor) {
 
+      // 👉 Doctor profile
+      if (this.selectedDoctor.Entity === 'Doctor') {
+        window.location.href =
+          `https://portal.prx.care/en/schedule-appointment/${this.selectedDoctor.Slug}`;
+        return;
+      }
 
-      window.location.href =
-        `https://portal.prx.care/en/schedule-appointment/${this.selectedDoctor.Slug}`;
-      return;
+      // 👉 Hospital page
+      if (this.selectedDoctor.Entity === 'Hospital') {
+        const params = new URLSearchParams({
+          tenantId: this.selectedDoctor.ID,
+          tenantIdAlt: this.selectedDoctor.ID
+        });
+
+        window.location.href =
+          `https://portal.prx.care/en/hospital?${params.toString()}`;
+        return;
+      }
     }
-
-    if (this.selectedDoctor && this.selectedDoctor.Entity === 'Hospital' && !this.searchText) {
-
-      const params = new URLSearchParams({
-        tenantId: this.selectedDoctor.ID,
-        tenantIdAlt: this.selectedDoctor.ID
-      });
-
-      window.location.href =
-        `https://portal.prx.care/en/hospital?${params.toString()}`;
-      return;
-    }
-
-    const params = new URLSearchParams({
-      condition: this.searchText || '',
-      doctor: this.facility || '',
-      city: this.selectedLocation?.city || '',
-      lat: this.selectedLocation?.latitude || '',
-      lng: this.selectedLocation?.longitude || ''
-    });
 
     window.location.href =
-      `https://portal.prx.care/en/schedule-appointment/search?${params.toString()}`;
+      `https://portal.prx.care/en/schedule-appointment`;
   }
 }
