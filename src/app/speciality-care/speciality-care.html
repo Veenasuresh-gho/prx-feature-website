@@ -23,23 +23,26 @@
         <input id="cond" type="text" [(ngModel)]="searchText" (focus)="onConditionFocus()" (input)="onConditionInput()"
           placeholder="Condition / procedure / treatment" autocomplete="off" />
 
-        <ul class="suggestions" *ngIf="showSuggestions && filteredConditions.length">
-          <li *ngFor="let item of filteredConditions" (click)="selectCondition(item)">
+        <ul class="suggestions" *ngIf="showSuggestions">
 
-            <div class="title">{{ item.SpecialtyName }}</div>
-
-            <div class="sub" *ngIf="item.BodyFunction">
-              {{ item.BodyFunction }}
-            </div>
-
-            <div class="sub" *ngIf="item.BodyParts">
-              {{ item.BodyParts }}
-            </div>
-            <div class="sub" *ngIf="item.BodyParts">
-              {{ item.Condition }}
-            </div>
-
+          <li *ngIf="isLoadingConditions" class="loader">
+            Loading...
           </li>
+
+          <ng-container *ngIf="!isLoadingConditions">
+            <li *ngFor="let item of filteredConditions" (click)="selectCondition(item)">
+              <div class="title">{{ item.SpecialtyName }}</div>
+
+              <div class="sub" *ngIf="item.BodyFunction">{{ item.BodyFunction }}</div>
+              <div class="sub" *ngIf="item.BodyParts">{{ item.BodyParts }}</div>
+              <div class="sub" *ngIf="item.Condition">{{ item.Condition }}</div>
+            </li>
+
+            <li *ngIf="!filteredConditions.length" class="no-results">
+              No results found
+            </li>
+          </ng-container>
+
         </ul>
       </div>
 
@@ -51,11 +54,23 @@
         <input id="fac" type="text" [(ngModel)]="facility" (focus)="onDoctorFocus()" (input)="onDoctorInput()"
           placeholder="Doctor's name / hospital / clinics" />
 
-        <ul class="suggestions" *ngIf="showDoctorSuggestions && filteredDoctors.length">
-          <li *ngFor="let doc of filteredDoctors" (click)="selectDoctor(doc)">
-            <div class="title">{{ doc.Name }}</div>
-            <div class="sub">{{ doc.Entity }}</div>
+        <ul class="suggestions" *ngIf="showDoctorSuggestions">
+
+          <li *ngIf="isLoadingDoctors" class="loader">
+            Searching...
           </li>
+
+          <ng-container *ngIf="!isLoadingDoctors">
+            <li *ngFor="let doc of filteredDoctors" (click)="selectDoctor(doc)">
+              <div class="title">{{ doc.Name }}</div>
+              <div class="sub">{{ doc.Entity }}</div>
+            </li>
+
+            <li *ngIf="!filteredDoctors.length" class="no-results">
+              No results found
+            </li>
+          </ng-container>
+
         </ul>
       </div>
       <div class="sf-div"></div>

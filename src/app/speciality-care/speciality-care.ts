@@ -52,6 +52,7 @@ export class SpecialityCare implements AfterViewInit, OnInit {
   showDoctorSuggestions = false;
   doctorSearchTimeout: any;
   showSuggestions = false;
+  isLoadingDoctors = false;
   isLoadingConditions = false;
   selectedCondition: any = null;
   srv = inject(GHOService);
@@ -80,7 +81,7 @@ export class SpecialityCare implements AfterViewInit, OnInit {
 
   getDoctorList() {
     if (!this.selectedLocation?.city) return;
-
+    this.isLoadingDoctors = true;
     this.tv = [
       { T: 'dk1', V: this.facility },
       { T: 'dk2', V: this.selectedLocation?.city },
@@ -89,6 +90,7 @@ export class SpecialityCare implements AfterViewInit, OnInit {
 
     this.srv.getdata('lists', this.tv).subscribe({
       next: (r) => {
+        this.isLoadingDoctors = false;
         if (r.Status === 1 && r.Data?.length > 0) {
           this.doctorList = r.Data[0];
           this.filteredDoctors = this.doctorList;
@@ -99,6 +101,7 @@ export class SpecialityCare implements AfterViewInit, OnInit {
         }
       },
       error: () => {
+        this.isLoadingDoctors = false;
         this.filteredDoctors = [];
         this.showDoctorSuggestions = false;
       }
