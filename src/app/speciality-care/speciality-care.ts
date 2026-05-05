@@ -55,6 +55,7 @@ export class SpecialityCare implements AfterViewInit, OnInit {
   isLoadingDoctors = false;
   isLoadingConditions = false;
   selectedCondition: any = null;
+  specialties: any[] = [];
   srv = inject(GHOService);
 
   getConditionList() {
@@ -71,12 +72,42 @@ export class SpecialityCare implements AfterViewInit, OnInit {
 
           this.conditionList = rawList;
           this.filteredConditions = [...this.conditionList];
+
+          this.specialties = this.conditionList.map((item: any) => {
+            const tagList = item.Tags
+              ? item.Tags.split(',').map((t: string) => t.trim())
+              : [];
+
+            return {
+              id: item.SpecialtyID,
+              name: item.SpecialtyName,
+              title: item.Specialty,
+              desc: item.BodyFunction || item.Condition || 'No description available',
+              tags: tagList
+            };
+          });
+
+          this.total = Math.ceil(this.specialties.length / this.PER_PAGE);
+          this.renderDesktop();
+          this.renderMobile();
+
         }
       },
       error: () => {
         this.isLoadingConditions = false;
       }
     });
+  }
+
+  goToSpeciality(s: any): void {
+    const params = new URLSearchParams({
+      tenantId: s.id,
+      type: 'Speciality',
+      name: s.name
+    });
+
+    window.location.href =
+      `https://portal.prx.care/en/schedule-appointment?${params.toString()}`;
   }
 
   get isSearchEnabled(): boolean {
@@ -177,26 +208,6 @@ export class SpecialityCare implements AfterViewInit, OnInit {
 
   }
 
-  specialties = [
-    { title: 'Dermatology (Skin Doctor)', desc: 'Treatment for skin, hair, and nail problems', tags: ['Skin issues', 'Hair fall', 'Acne'] },
-    { title: 'Cardiology (Heart Specialist)', desc: 'Care for heart problems and blood pressure', tags: ['Heart disease', 'BP', 'Chest pain'] },
-    { title: 'Orthopedic (Bone Specialist)', desc: 'Treatment for bones, joints, and injuries', tags: ['Back pain', 'Joint pain', 'Fractures'] },
-    { title: 'Neurology (Brain & Nerve Specialist)', desc: 'Care for brain, spine, and nerve disorders', tags: ['Headache', 'Stroke', 'Nerve pain'] },
-    { title: 'Pediatrics (Child Specialist)', desc: 'Healthcare for babies, kids, and teens', tags: ['Fever', 'Growth', 'Vaccination'] },
-    { title: "Gynecology (Women's Health Specialist)", desc: "Care for women's health and pregnancy", tags: ['Periods', 'Pregnancy', 'PCOS'] },
-    { title: 'Psychiatry (Mental Health Doctor)', desc: 'Support for mental and emotional health', tags: ['Anxiety', 'Depression', 'Stress'] },
-    { title: 'Gastroenterology (Stomach Specialist)', desc: 'Care for digestive and stomach issues', tags: ['Acidity', 'Ulcer', 'Digestion'] },
-    { title: 'Pulmonology (Lung Specialist)', desc: 'Care for breathing and lung conditions', tags: ['Asthma', 'Cough', 'Breathing issues'] },
-    { title: 'Nephrology (Kidney Specialist)', desc: 'Treatment for kidney and fluid problems', tags: ['Kidney stones', 'Dialysis', 'Swelling'] },
-    { title: 'Oncology (Cancer Specialist)', desc: 'Diagnosis and treatment of various cancers', tags: ['Tumors', 'Chemotherapy', 'Screening'] },
-    { title: 'Ophthalmology (Eye Specialist)', desc: 'Care for vision and eye conditions', tags: ['Cataract', 'Glaucoma', 'Vision loss'] },
-    { title: 'ENT (Ear, Nose & Throat)', desc: 'Treatment for ear, nose and throat disorders', tags: ['Ear pain', 'Sinusitis', 'Tonsils'] },
-    { title: 'Endocrinology (Hormone Specialist)', desc: 'Care for hormonal disorders', tags: ['Diabetes', 'Thyroid', 'Hormones'] },
-    { title: 'Urology (Kidney & Urinary)', desc: 'Treatment for urinary tract and kidneys', tags: ['UTI', 'Kidney stones', 'Prostate'] },
-    { title: 'Rheumatology (Joint Specialist)', desc: 'Care for arthritis and autoimmune conditions', tags: ['Arthritis', 'Lupus', 'Gout'] },
-    { title: 'Hematology (Blood Specialist)', desc: 'Treatment for blood disorders', tags: ['Anemia', 'Blood clots', 'Leukemia'] },
-    { title: 'Dentistry (Dental Specialist)', desc: 'Complete dental care', tags: ['Cavities', 'Root canal', 'Braces'] },
-  ];
 
   PER_PAGE = 9;
   MOB_LIMIT = 5;
@@ -206,6 +217,21 @@ export class SpecialityCare implements AfterViewInit, OnInit {
   ICON = '/deco-briefcase.svg';
 
   ngOnInit(): void {
+
+    // ✅ FIXED GLOBAL FUNCTION
+    (window as any).specialityClick = (id: number, name: string) => {
+      const params = new URLSearchParams({
+        tenantId: id.toString(),   // ✅ use id
+        type: 'Speciality',
+        name: name                 // ✅ use name
+      });
+
+      window.location.href =
+        `https://portal.prx.care/en/schedule-appointment?${params.toString()}`;
+    };
+
+    this.getConditionList();
+
     const stored = sessionStorage.getItem('userLocation');
 
     if (stored) {
@@ -219,7 +245,6 @@ export class SpecialityCare implements AfterViewInit, OnInit {
         console.error('Invalid stored location');
       }
     }
-
   }
 
   ngAfterViewInit(): void {
@@ -294,19 +319,22 @@ export class SpecialityCare implements AfterViewInit, OnInit {
   }
 
   cardHTML(s: any): string {
+    const safeName = encodeURIComponent(s.name);
+
     const tags = s.tags.map((t: string, i: number) =>
       `<span class="tag">${t}</span>${i < s.tags.length - 1 ? '<span class="tag-sep">•</span>' : ''}`
     ).join('');
 
-    return `<article class="card">
-          <div class="card__ico">
-            <img src="${this.ICON}" alt="icon">
-          </div>
-          <h3 class="card__title">${s.title}</h3>
-          <p class="card__desc">${s.desc}</p>
-          <div class="card__tags">${tags}</div>
-        </article>`;
+    return `<article class="card" onclick="window.specialityClick(${s.id}, decodeURIComponent('${safeName}'))">
+      <div class="card__ico">
+        <img src="${this.ICON}" alt="icon">
+      </div>
+      <h3 class="card__title">${s.title}</h3>
+      <p class="card__desc">${s.desc}</p>
+      <div class="card__tags ">${tags}</div>
+    </article>`;
   }
+
 
   renderDesktop(): void {
     const start = (this.page - 1) * this.PER_PAGE;
