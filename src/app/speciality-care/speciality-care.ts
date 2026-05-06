@@ -221,7 +221,7 @@ export class SpecialityCare implements AfterViewInit, OnInit {
     // ✅ FIXED GLOBAL FUNCTION
     (window as any).specialityClick = (id: number, name: string) => {
       const params = new URLSearchParams({
-        tenantId: id.toString(),   // ✅ use id
+        tenantId: id.toString(),  
         type: 'Speciality',
         name: name                 // ✅ use name
       });
@@ -392,7 +392,6 @@ export class SpecialityCare implements AfterViewInit, OnInit {
   }
   doSearch(): void {
 
-    // ✅ 1. If condition selected → go to speciality page
     if (this.selectedCondition) {
       const params = new URLSearchParams({
         tenantId: this.selectedCondition.SpecialtyID,
