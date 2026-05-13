@@ -115,11 +115,10 @@ export class SpecialityCare implements AfterViewInit, OnInit {
   }
 
   getDoctorList() {
-    if (!this.selectedLocation?.city) return;
     this.isLoadingDoctors = true;
     this.tv = [
       { T: 'dk1', V: this.facility },
-      { T: 'dk2', V: this.selectedLocation?.city },
+      { T: 'dk2', V: this.selectedLocation?.city || '' },
       { T: 'c10', V: '14' }
     ];
 
