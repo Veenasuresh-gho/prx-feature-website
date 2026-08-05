@@ -37,7 +37,7 @@
         <div class="select-wrapper" [class.invalid]="isSelectInvalid(formData.type)">
           <select id="type" class="form-select" [(ngModel)]="formData.type" name="type">
             <option value="" disabled selected>Select type</option>
-            <option *ngFor="let t of facilityTypes" [value]="t">{{ t }}</option>
+            <option *ngFor="let t of facilityTypeList" [value]="t.DataValue">{{ t.DisplyText }}</option>
           </select>
           <span class="select-arrow">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"

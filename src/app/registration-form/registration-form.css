@@ -250,7 +250,8 @@
     font-weight: 500;
     color: #fca5a5;
     line-height: 1;
-    display: none
+    margin-top: 2px;
+    display: block;
 }
 
 .field--err .err-msg {

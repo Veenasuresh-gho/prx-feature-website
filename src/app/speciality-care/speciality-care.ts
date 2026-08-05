@@ -13,7 +13,6 @@ import { FormsModule } from '@angular/forms';
 import { tags } from '../model/ghomodel';
 import { GHOService } from '../services/ghoServices';
 
-
 declare var google: any;
 
 @Component({
@@ -26,13 +25,22 @@ declare var google: any;
 })
 export class SpecialityCare implements AfterViewInit, OnInit {
   @HostListener('document:click', ['$event'])
-  handleOutsideClick(event: any) {
-    if (!event.target.closest('.sf')) {
+  handleOutsideClick(event: MouseEvent) {
+    if (!(event.target as HTMLElement).closest('.sf')) {
       this.showSuggestions = false;
       this.showDoctorSuggestions = false;
+      this.closeLocationDropdown();
     }
   }
+
+  private closeLocationDropdown(): void {
+    if (this.locationInput?.nativeElement) {
+      this.locationInput.nativeElement.blur();
+    }
+  }
+
   @ViewChild('locationInput') locationInput!: ElementRef;
+
   searchText: string = '';
   facility: string = '';
   selectedLocation: any = {
@@ -57,6 +65,13 @@ export class SpecialityCare implements AfterViewInit, OnInit {
   selectedCondition: any = null;
   specialties: any[] = [];
   srv = inject(GHOService);
+
+  PER_PAGE = 9;
+  MOB_LIMIT = 5;
+  page = 1;
+  total = Math.ceil(this.specialties.length / this.PER_PAGE);
+
+  ICON = '/deco-briefcase.svg';
 
   getConditionList() {
     this.isLoadingConditions = true;
@@ -90,7 +105,6 @@ export class SpecialityCare implements AfterViewInit, OnInit {
           this.total = Math.ceil(this.specialties.length / this.PER_PAGE);
           this.renderDesktop();
           this.renderMobile();
-
         }
       },
       error: () => {
@@ -143,12 +157,21 @@ export class SpecialityCare implements AfterViewInit, OnInit {
   }
 
   onDoctorFocus(): void {
+    this.closeLocationDropdown();
+
+    this.showSuggestions = false;
+
     if (!this.doctorList.length) {
       this.getDoctorList();
     }
 
     this.filteredDoctors = [...this.doctorList];
     this.showDoctorSuggestions = true;
+  }
+
+  onLocationFocus(): void {
+    this.showSuggestions = false;
+    this.showDoctorSuggestions = false;
   }
 
   onDoctorInput(): void {
@@ -167,20 +190,20 @@ export class SpecialityCare implements AfterViewInit, OnInit {
     }, 400);
   }
 
-
   selectDoctor(doc: any): void {
     this.facility = doc.Name;
     this.selectedDoctor = doc;
     this.showDoctorSuggestions = false;
-
   }
 
-
   onConditionFocus(): void {
+    this.closeLocationDropdown();
+
+    this.showDoctorSuggestions = false;
+
     if (!this.conditionList.length && !this.isLoadingConditions) {
       this.getConditionList();
     }
-
 
     this.filteredConditions = [...this.conditionList];
     this.showSuggestions = true;
@@ -200,29 +223,17 @@ export class SpecialityCare implements AfterViewInit, OnInit {
   }
 
   selectCondition(item: any): void {
-    console.log(item)
     this.searchText = item.SpecialtyName;
     this.selectedCondition = item;
     this.showSuggestions = false;
-
   }
 
-
-  PER_PAGE = 9;
-  MOB_LIMIT = 5;
-  page = 1;
-  total = Math.ceil(this.specialties.length / this.PER_PAGE);
-
-  ICON = '/deco-briefcase.svg';
-
   ngOnInit(): void {
-
-    // ✅ FIXED GLOBAL FUNCTION
     (window as any).specialityClick = (id: number, name: string) => {
       const params = new URLSearchParams({
-        tenantId: id.toString(),  
+        tenantId: id.toString(),
         type: 'Speciality',
-        name: name                 // ✅ use name
+        name: name
       });
 
       window.location.href =
@@ -274,7 +285,6 @@ export class SpecialityCare implements AfterViewInit, OnInit {
       let country = '';
 
       place.address_components?.forEach((comp: any) => {
-
         if (comp.types.includes('sublocality') || comp.types.includes('sublocality_level_1')) {
           sublocality = comp.long_name;
         }
@@ -284,7 +294,6 @@ export class SpecialityCare implements AfterViewInit, OnInit {
         }
 
         if (comp.types.includes('administrative_area_level_3')) {
-
           district = comp.long_name;
         }
 
@@ -311,16 +320,20 @@ export class SpecialityCare implements AfterViewInit, OnInit {
         longitude: place.geometry.location.lng()
       };
 
-      console.log('Selected Location:', this.selectedLocation);
-
       sessionStorage.setItem('userLocation', JSON.stringify(this.selectedLocation));
+
+      this.locationInput.nativeElement.blur();
+
+      this.doctorList = [];
+      this.filteredDoctors = [];
+      this.getDoctorList();
     });
   }
 
   cardHTML(s: any): string {
     const safeName = encodeURIComponent(s.name);
 
-    const tags = s.tags.map((t: string, i: number) =>
+    const tagsHtml = s.tags.map((t: string, i: number) =>
       `<span class="tag">${t}</span>${i < s.tags.length - 1 ? '<span class="tag-sep">•</span>' : ''}`
     ).join('');
 
@@ -330,10 +343,9 @@ export class SpecialityCare implements AfterViewInit, OnInit {
       </div>
       <h3 class="card__title">${s.title}</h3>
       <p class="card__desc">${s.desc}</p>
-      <div class="card__tags ">${tags}</div>
+      <div class="card__tags">${tagsHtml}</div>
     </article>`;
   }
-
 
   renderDesktop(): void {
     const start = (this.page - 1) * this.PER_PAGE;
@@ -364,8 +376,6 @@ export class SpecialityCare implements AfterViewInit, OnInit {
     }
   }
 
-
-
   renderMobile(): void {
     const mob = document.getElementById('mobileGrid');
     if (!mob) return;
@@ -389,7 +399,31 @@ export class SpecialityCare implements AfterViewInit, OnInit {
       this.renderDesktop();
     }
   }
+
   doSearch(): void {
+
+    if (this.selectedDoctor) {
+
+      if (this.selectedDoctor.Entity === 'Doctor') {
+        const slug = this.selectedDoctor.ID;
+        this.resetFields();
+        window.location.href =
+          `https://portal.prx.care/en/schedule-appointment/${slug}`;
+        return;
+      }
+
+      if (this.selectedDoctor.Entity === 'Hospital') {
+        const params = new URLSearchParams({
+          tenantId: this.selectedDoctor.ID,
+          tenantIdAlt: this.selectedDoctor.ID
+        });
+
+        this.resetFields();
+        window.location.href =
+          `https://portal.prx.care/en/hospital?${params.toString()}`;
+        return;
+      }
+    }
 
     if (this.selectedCondition) {
       const params = new URLSearchParams({
@@ -398,35 +432,25 @@ export class SpecialityCare implements AfterViewInit, OnInit {
         name: this.selectedCondition.SpecialtyName
       });
 
+      this.resetFields();
       window.location.href =
         `https://portal.prx.care/en/schedule-appointment?${params.toString()}`;
       return;
     }
 
-    // ✅ 2. If doctor selected
-    if (this.selectedDoctor) {
-
-      // 👉 Doctor profile
-      if (this.selectedDoctor.Entity === 'Doctor') {
-        window.location.href =
-          `https://portal.prx.care/en/schedule-appointment/${this.selectedDoctor.Slug}`;
-        return;
-      }
-
-      // 👉 Hospital page
-      if (this.selectedDoctor.Entity === 'Hospital') {
-        const params = new URLSearchParams({
-          tenantId: this.selectedDoctor.ID,
-          tenantIdAlt: this.selectedDoctor.ID
-        });
-
-        window.location.href =
-          `https://portal.prx.care/en/hospital?${params.toString()}`;
-        return;
-      }
-    }
-
+    this.resetFields();
     window.location.href =
       `https://portal.prx.care/en/schedule-appointment`;
+  }
+
+  private resetFields(): void {
+    this.searchText = '';
+    this.facility = '';
+    this.selectedCondition = null;
+    this.selectedDoctor = null;
+    this.filteredConditions = [];
+    this.filteredDoctors = [];
+    this.showSuggestions = false;
+    this.showDoctorSuggestions = false;
   }
 }

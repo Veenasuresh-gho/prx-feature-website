@@ -26,16 +26,18 @@
         <ul class="suggestions" *ngIf="showSuggestions">
 
           <li *ngIf="isLoadingConditions" class="loader">
-            Loading...
+            Loading conditions
           </li>
 
           <ng-container *ngIf="!isLoadingConditions">
             <li *ngFor="let item of filteredConditions" (click)="selectCondition(item)">
-              <div class="title">{{ item.SpecialtyName }}</div>
-
-              <div class="sub" *ngIf="item.BodyFunction">{{ item.BodyFunction }}</div>
-              <div class="sub" *ngIf="item.BodyParts">{{ item.BodyParts }}</div>
-              <div class="sub" *ngIf="item.Condition">{{ item.Condition }}</div>
+              <span class="sugg-ico">{{ item.SpecialtyName?.charAt(0) || '?' }}</span>
+              <span class="sugg-body">
+                <span class="title">{{ item.SpecialtyName }}</span>
+                <span class="sub" *ngIf="item.BodyFunction">{{ item.BodyFunction }}</span>
+                <span class="sub" *ngIf="item.BodyParts">{{ item.BodyParts }}</span>
+                <span class="sub" *ngIf="item.Condition">{{ item.Condition }}</span>
+              </span>
             </li>
 
             <li *ngIf="!filteredConditions.length" class="no-results">
@@ -57,13 +59,16 @@
         <ul class="suggestions" *ngIf="showDoctorSuggestions">
 
           <li *ngIf="isLoadingDoctors" class="loader">
-            Searching...
+            Searching
           </li>
 
           <ng-container *ngIf="!isLoadingDoctors">
             <li *ngFor="let doc of filteredDoctors" (click)="selectDoctor(doc)">
-              <div class="title">{{ doc.Name }}</div>
-              <div class="sub">{{ doc.Entity }}</div>
+              <span class="sugg-ico">{{ doc.Name?.charAt(0) || '?' }}</span>
+              <span class="sugg-body">
+                <span class="title">{{ doc.Name }}</span>
+              </span>
+              <span class="sugg-tag" *ngIf="doc.Entity">{{ doc.Entity }}</span>
             </li>
 
             <li *ngIf="!filteredDoctors.length" class="no-results">
@@ -77,8 +82,14 @@
 
       <div class="sf">
         <label for="loc">Location</label>
-        <input #locationInput id="loc" type="text" [(ngModel)]="selectedLocation.city" placeholder="Select location"
-          autocomplete="off" />
+       <input
+  #locationInput
+  id="loc"
+  type="text"
+  [(ngModel)]="selectedLocation.city"
+  (focus)="onLocationFocus()"
+  placeholder="Select location"
+  autocomplete="off" />
       </div>
 
       <button class="srch-btn" (click)="doSearch()" [disabled]="!isSearchEnabled">

@@ -1,15 +1,31 @@
 <footer class="footer">
   <!-- Newsletter Section -->
   <div class="newsletter-section">
-    <div class="newsletter-content">
-      <h3 class="newsletter-title">Subscribe to Our Newsletter</h3>
-      <p class="newsletter-subtitle">Get the latest updates and healthcare news delivered to your inbox.</p>
-      <div class="newsletter-form">
-        <input type="email" class="newsletter-input" placeholder="Enter your email" />
-        <button class="subscribe-btn">Subscribe</button>
-      </div>
+  <div class="newsletter-content">
+    <h3 class="newsletter-title">Subscribe to Our Newsletter</h3>
+
+    <p class="newsletter-subtitle">
+      Get the latest updates and healthcare news delivered to your inbox.
+    </p>
+
+    <div class="newsletter-form">
+      <input
+        type="email"
+        class="newsletter-input"
+        placeholder="Enter your email"
+        [(ngModel)]="email"
+      />
+
+      <button
+        class="subscribe-btn"
+        (click)="handleSubscribe()"
+        [disabled]="loading"
+      >
+        {{ loading ? 'Subscribing...' : 'Subscribe' }}
+      </button>
     </div>
   </div>
+</div>
 
   <!-- Links Section -->
   <div class="links-section">

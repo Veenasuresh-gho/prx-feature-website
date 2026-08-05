@@ -30,6 +30,7 @@ export class JoinPrxModal implements OnInit {
   countryList: any;
   srv = inject(GHOService);
   toast = inject(ToastService);
+  facilityTypeList: any[] = [];
 
   facilityTypes = [
     'Hospital',
@@ -60,6 +61,20 @@ export class JoinPrxModal implements OnInit {
 
   ngOnInit(): void {
     this.getCountry();
+    this.getfacilityTypeList();
+  }
+
+  getfacilityTypeList() {
+    this.tv = [
+      { T: 'dk1', V: 'TENANTTYPEID' },
+      { T: 'c10', V: '5' }
+    ];
+    this.srv.getdata('lists', this.tv).subscribe((r) => {
+      if (r.Status === 1 && r.Data?.length > 0) {
+        this.facilityTypeList = r.Data[0];
+        console.log(this.facilityTypeList)
+      }
+    });
   }
 
   getCountry() {
@@ -103,7 +118,7 @@ export class JoinPrxModal implements OnInit {
           setTimeout(() => {
             this.resetForm();
             this.cancelled.emit();
-          }, 500); 
+          }, 500);
         }
       });
 
