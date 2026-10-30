@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ToastService } from '../services/toastService';
+import { CountryService } from '../services/country-service';
 
 @Component({
   selector: 'app-footer',
@@ -13,7 +14,7 @@ import { ToastService } from '../services/toastService';
 export class Footer {
   email = '';
   loading = false;
-
+  countryService = inject(CountryService);
   private toast = inject(ToastService);
 
   async handleSubscribe() {
