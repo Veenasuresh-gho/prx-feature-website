@@ -121,7 +121,7 @@ export class SpecialityCare implements AfterViewInit, OnInit {
     });
 
     window.location.href =
-      `https://portal.prx.care/en/schedule-appointment?${params.toString()}`;
+      `https://portal.prx.care/schedule-appointment?${params.toString()}`;
   }
 
   get isSearchEnabled(): boolean {
@@ -237,7 +237,7 @@ export class SpecialityCare implements AfterViewInit, OnInit {
       });
 
       window.location.href =
-        `https://portal.prx.care/en/schedule-appointment?${params.toString()}`;
+        `https://portal.prx.care/schedule-appointment?${params.toString()}`;
     };
 
     this.getConditionList();
@@ -408,7 +408,7 @@ export class SpecialityCare implements AfterViewInit, OnInit {
         const slug = this.selectedDoctor.ID;
         this.resetFields();
         window.location.href =
-          `https://portal.prx.care/en/schedule-appointment/${slug}`;
+          `https://portal.prx.care/schedule-appointment/${slug}`;
         return;
       }
 
@@ -420,7 +420,7 @@ export class SpecialityCare implements AfterViewInit, OnInit {
 
         this.resetFields();
         window.location.href =
-          `https://portal.prx.care/en/hospital?${params.toString()}`;
+          `https://portal.prx.care/hospital?${params.toString()}`;
         return;
       }
     }
@@ -434,13 +434,13 @@ export class SpecialityCare implements AfterViewInit, OnInit {
 
       this.resetFields();
       window.location.href =
-        `https://portal.prx.care/en/schedule-appointment?${params.toString()}`;
+        `https://portal.prx.care/schedule-appointment?${params.toString()}`;
       return;
     }
 
     this.resetFields();
     window.location.href =
-      `https://portal.prx.care/en/schedule-appointment`;
+      `https://portal.prx.care/schedule-appointment`;
   }
 
   private resetFields(): void {
