@@ -1,11 +1,12 @@
 <header class="navbar">
     <div class="navbar__container">
 
+        <!-- Logo -->
         <a href="/" class="navbar__logo">
-            <img src="/PRx-Logo.png" />
+            <img src="/PRx-Logo.png" alt="PRx Logo">
         </a>
 
-        <!-- Desktop Nav -->
+        <!-- Desktop Navigation -->
         <nav class="navbar__nav">
 
             <!-- Patients -->
@@ -13,7 +14,7 @@
                 <button class="navbar__nav-link" (click)="toggleDropdown('patients', $event)">
                     For Patients
                     <svg class="chevron" [class.rotate]="activeDropdown === 'patients'" viewBox="0 0 24 24">
-                        <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" />
+                        <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" fill="none" />
                     </svg>
                 </button>
 
@@ -30,7 +31,7 @@
                 <button class="navbar__nav-link" (click)="toggleDropdown('providers', $event)">
                     For Providers
                     <svg class="chevron" [class.rotate]="activeDropdown === 'providers'" viewBox="0 0 24 24">
-                        <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" />
+                        <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" fill="none" />
                     </svg>
                 </button>
 
@@ -40,54 +41,135 @@
                         Join Network
                     </a>
 
-                    <a href="https://hospital-dashboard.prx.care/">Hospital Login</a>
-                    <a href="https://lab.prx.care/auth/login">Lab Login</a>
+                    <a href="https://hospital-dashboard.prx.care/">
+                        Hospital Login
+                    </a>
+
+                    <a href="https://lab.prx.care/auth/login">
+                        Lab Login
+                    </a>
+
                     <a class="dropdown-btn" (click)="openRequestDemoModal($event)">
                         Request Demo
                     </a>
                 </div>
-
-                <!-- Modal -->
-                <app-join-prx-modal *ngIf="isJoinModalOpen" (cancelled)="closeJoinModal()">
-                </app-join-prx-modal>
-
-                <app-request-demo-modal *ngIf="isRequestDemoModalOpen" (cancelled)="closeRequestDemoModal()">
-                </app-request-demo-modal>
-
-
             </div>
 
+            <!-- ABDM -->
             <a *ngIf="!location || location?.country === 'India'"
-                href="https://portal.prx.care/en/ayushman-bharath-digital-mission" class="navbar__nav-link">
+                href="https://portal.prx.care/ayushman-bharath-digital-mission" class="navbar__nav-link">
                 ABDM
             </a>
+
         </nav>
 
         <!-- Actions -->
         <div class="navbar__actions">
-            <!-- <a href="/download" class="nb-btn nb-btn--download">Download App</a> -->
-            <a href="https://portal.prx.care" target="_blank" class="nb-btn nb-btn--cta">
+            <a href="https://portal.prx.care" target="_blank" rel="noopener noreferrer" class="nb-btn nb-btn--cta">
                 Get Started
             </a>
         </div>
-        
+
         <!-- Hamburger -->
-        <button class="navbar__hamburger" (click)="toggleMobile($event)" [class.open]="isMenuOpen">
+        <button class="navbar__hamburger" type="button" aria-label="Toggle navigation" [attr.aria-expanded]="isMenuOpen"
+            (click)="toggleMobile($event)" [class.open]="isMenuOpen">
+
             <span></span>
             <span></span>
             <span></span>
         </button>
+
     </div>
 
-    <!-- Mobile -->
+    <!-- Mobile Navigation -->
     <div class="navbar__mobile" [class.open]="isMenuOpen">
-        <a href="/for-patients">For Patients</a>
-        <a href="/for-providers">For Providers</a>
-        <a href="/abdm">ABDM</a>
 
+        <!-- Patients -->
+        <div class="mobile-nav-item">
+            <button class="mobile-nav-link" [attr.aria-expanded]="activeMobileDropdown === 'patients'"
+                (click)="toggleMobileDropdown('patients')">
+
+                <span>For Patients</span>
+
+                <svg class="mobile-chevron" [class.rotate]="activeMobileDropdown === 'patients'" viewBox="0 0 24 24">
+                    <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" fill="none" />
+                </svg>
+            </button>
+
+            <div class="mobile-submenu" [class.expanded]="activeMobileDropdown === 'patients'">
+
+                <a href="https://portal.prx.care" (click)="closeMobileMenu()">
+                    Find a Doctor
+                </a>
+
+                <a href="https://portal.prx.care" (click)="closeMobileMenu()">
+                    Book Appointment
+                </a>
+
+                <a href="https://portal.prx.care" (click)="closeMobileMenu()">
+                    Medical Records
+                </a>
+
+                <a href="https://portal.prx.care" (click)="closeMobileMenu()">
+                    Home Care
+                </a>
+            </div>
+        </div>
+
+        <!-- Providers -->
+        <div class="mobile-nav-item">
+            <button class="mobile-nav-link" [attr.aria-expanded]="activeMobileDropdown === 'providers'"
+                (click)="toggleMobileDropdown('providers')">
+
+                <span>For Providers</span>
+
+                <svg class="mobile-chevron" [class.rotate]="activeMobileDropdown === 'providers'" viewBox="0 0 24 24">
+                    <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" fill="none" />
+                </svg>
+            </button>
+
+            <div class="mobile-submenu" [class.expanded]="activeMobileDropdown === 'providers'">
+
+                <a class="dropdown-btn" (click)="openJoinModal($event); closeMobileMenu()">
+                    Join Network
+                </a>
+
+                <a href="https://hospital-dashboard.prx.care/" (click)="closeMobileMenu()">
+                    Hospital Login
+                </a>
+
+                <a href="https://lab.prx.care/auth/login" (click)="closeMobileMenu()">
+                    Lab Login
+                </a>
+
+                <a class="dropdown-btn" (click)="openRequestDemoModal($event); closeMobileMenu()">
+                    Request Demo
+                </a>
+            </div>
+        </div>
+
+        <!-- ABDM -->
+        <a *ngIf="!location || location?.country === 'India'"
+            href="https://portal.prx.care/ayushman-bharath-digital-mission" class="mobile-main-link"
+            (click)="closeMobileMenu()">
+            ABDM
+        </a>
+
+        <!-- Divider -->
         <div class="mobile-divider"></div>
 
-        <a href="/download" class="mobile-btn mobile-btn--dl">Download App</a>
-        <a href="/get-started" class="mobile-btn mobile-btn--cta">Get Started</a>
+        <!-- Download App -->
+        <a href="/download" class="mobile-btn mobile-btn--download" (click)="closeMobileMenu()">
+            Download App
+        </a>
+
     </div>
+
+    <!-- Modals -->
+    <app-join-prx-modal *ngIf="isJoinModalOpen" (cancelled)="closeJoinModal()">
+    </app-join-prx-modal>
+
+    <app-request-demo-modal *ngIf="isRequestDemoModalOpen" (cancelled)="closeRequestDemoModal()">
+    </app-request-demo-modal>
+
 </header>

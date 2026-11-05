@@ -38,17 +38,18 @@
     color: var(--muted-text);
 }
 
-/* Badge strip */
 .trust__badges {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 20px;
     align-items: center;
+    justify-content: center;
 }
 
 .trust__badge {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 14px;
 }
 
@@ -145,9 +146,6 @@
     text-align: center;
 }
 
-/* ══════════════════════════════════════════════════
-   SECTION 2 — CARE THAT FITS YOUR EVERYDAY LIFE
-══════════════════════════════════════════════════ */
 .care {
     padding: 72px 0 64px;
 }
@@ -518,5 +516,12 @@
     .care__btn {
         font-size: 14px;
         padding: 12px 28px
+    }
+}
+
+@media (max-width: 1024px) {
+    .trust__badges {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 28px 32px;
     }
 }
