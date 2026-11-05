@@ -400,4 +400,97 @@
   .last-updated-bar {
     text-align: left;
   }
+  .qr-pair {
+    gap: 8px;
+}
+
+.qr-placeholder {
+    width: 110px;
+    height: 110px;
+    padding: 4px;
+}
+
+.qr-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+}
+
+@media (max-width: 480px) {
+    .qr-placeholder {
+        width: 90px;
+        height: 90px;
+    }
+
+    .qr-pair {
+        gap: 8px;
+    }
+    
+}
+
+@media (max-width: 420px) {
+    .store-badges {
+        gap: 6px;
+    }
+
+    .store-badge {
+        min-width: 125px;
+        padding: 6px 8px;
+        gap: 5px;
+    }
+
+    .store-badge img {
+        width: 17px;
+    }
+
+    .badge-sub {
+        font-size: 8px;
+    }
+
+    .badge-main {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 320px) {
+    .store-badges {
+        gap: 5px;
+    }
+
+    .store-badge {
+        min-width: 0;
+        padding: 5px 6px;
+        gap: 4px;
+        flex: 1;
+    }
+
+    .store-badge img {
+        width: 14px;
+    }
+
+    .badge-sub {
+        font-size: 7px;
+    }
+
+    .badge-main {
+        font-size: 10px;
+    }
+}
+@media (max-width: 320px) {
+    .qr-pair {
+        gap: 6px;
+    }
+
+    .qr-placeholder {
+        width: 65px;
+        height: 65px;
+        padding: 3px;
+    }
+
+    .qr-placeholder img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
 }

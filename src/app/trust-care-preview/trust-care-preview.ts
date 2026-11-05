@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { CountryService } from '../services/country-service';
 
 @Component({
   selector: 'trust-care-preview',
@@ -6,4 +7,7 @@ import { Component } from '@angular/core';
   templateUrl: './trust-care-preview.html',
   styleUrl: './trust-care-preview.css',
 })
-export class TrustCarePreview {}
+export class TrustCarePreview {
+
+   countryService = inject(CountryService);
+}
